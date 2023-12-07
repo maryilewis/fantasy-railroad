@@ -10,11 +10,16 @@ extends Node3D
 @onready var train = preload("res://Vehicles/train.tscn")
 
 var train_instance
+var train_progress: PathFollow3D
+var current_road: RoadNode
+var current_j = 2
+var direction = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_map()
-	add_train()
+	train_instance = $Train
+	move_train_along()
 
 func create_map():
 	for i in range(10):
@@ -40,11 +45,24 @@ func create_map():
 			WorldMapData.map_nodes[i].append(new_square)
 
 
-func add_train():
-	train_instance = train.instantiate()
-	var target = WorldMapData.map_nodes[7][9]
-	target.add_child(train_instance)
+func move_train_along():
+	if (current_road != null):
+		current_road.remove_path_child()
+	current_road = WorldMapData.map_nodes[7][current_j]
+	if (direction == -1):
+		train_progress = current_road.add_path_child_ew(train_instance)
+	elif (direction == 1):
+		train_progress = current_road.add_path_child_we(train_instance)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if (train_progress.progress_ratio >= .99):
+		if (current_j == 9 and direction == 1):
+			direction = -1
+		elif (current_j == 0 and direction == -1):
+			direction = 1
+		else:
+			current_j += direction
+		move_train_along()
+		
