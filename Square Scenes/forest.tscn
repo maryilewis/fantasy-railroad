@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://blw771httbw02"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk78h"]
+albedo_color = Color(0.196078, 0.356863, 0.176471, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v0745"]
+material = SubResource("StandardMaterial3D_sk78h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wxws"]
+albedo_color = Color(0.054902, 0.223529, 0.176471, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_th55h"]
+material = SubResource("StandardMaterial3D_0wxws")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpkik"]
+albedo_color = Color(0.364706, 0.231373, 0.141176, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_awfmf"]
+material = SubResource("StandardMaterial3D_cpkik")
+
+[node name="Forest" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_6dlx2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_v0745")
+
+[node name="tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.2, 0, 1, 0)
+mesh = SubResource("PrismMesh_th55h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.25, 0, 0, 0, 0.1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_awfmf")
