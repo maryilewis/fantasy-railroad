@@ -1,25 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0oi384hcdjy7"]
+[gd_scene load_steps=8 format=3 uid="uid://d0oi384hcdjy7"]
+
+[ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="1_5ry6f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xhrlj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5jetc"]
-albedo_color = Color(0, 0, 0, 1)
-metallic = 1.0
-roughness = 0.0
-clearcoat_enabled = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_h0m5o"]
-material = SubResource("StandardMaterial3D_5jetc")
+material = ExtResource("1_5ry6f")
+
+[sub_resource type="BoxMesh" id="BoxMesh_undsm"]
+material = ExtResource("1_5ry6f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bw5mf"]
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, -0.3, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjwt5"]
+transparency = 1
+albedo_color = Color(0.803922, 0.803922, 0.803922, 0.45098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_crji2"]
+material = SubResource("StandardMaterial3D_tjwt5")
+radius = 0.05
+height = 0.1
 
 [node name="Train" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_xhrlj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+[node name="Engine" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.125, 0)
 mesh = SubResource("BoxMesh_h0m5o")
 skeleton = NodePath("../..")
+
+[node name="Smokestack" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.29611, 0)
+mesh = SubResource("BoxMesh_undsm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="StaticBody3D/CollisionShape3D/Smokestack"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.01308, 0)
+transparency = 0.51
+visibility_range_fade_mode = 2
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_bw5mf")
+draw_pass_1 = SubResource("SphereMesh_crji2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.756234, -0.276656)
