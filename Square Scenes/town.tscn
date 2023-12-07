@@ -40,14 +40,54 @@ shape = SubResource("BoxShape3D_6dlx2")
 mesh = SubResource("BoxMesh_v0745")
 
 [node name="building" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.75, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.4, 0.6, -0.4)
 mesh = SubResource("BoxMesh_wnm72")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="window" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(0.6, 0, 0, 0, 0.1, 0, 0, 0, 0.6, 0, 0.75, 0)
+[node name="window" type="MeshInstance3D" parent="StaticBody3D/building"]
+transform = Transform3D(1.2, 0, 0, 0, 0.2, 0, 0, 0, 1.2, 0, 0, 0)
 mesh = SubResource("CylinderMesh_uuhwy")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="building2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.4, 0.6, 0.4)
+mesh = SubResource("BoxMesh_wnm72")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="window" type="MeshInstance3D" parent="StaticBody3D/building2"]
+transform = Transform3D(1.2, 0, 0, 0, 0.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uuhwy")
+skeleton = NodePath("../../..")
+
+[node name="building3" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.4, 0.6, -0.413329)
+mesh = SubResource("BoxMesh_wnm72")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="window" type="MeshInstance3D" parent="StaticBody3D/building3"]
+transform = Transform3D(1.2, 0, 0, 0, 0.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uuhwy")
+skeleton = NodePath("../../..")
+
+[node name="building4" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.396742, 0.6, 0.4)
+mesh = SubResource("BoxMesh_wnm72")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="window" type="MeshInstance3D" parent="StaticBody3D/building4"]
+transform = Transform3D(1.2, 0, 0, 0, 0.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uuhwy")
+skeleton = NodePath("../../..")
+
+[node name="building5" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0182981, 0.962251, 0.0103708)
+mesh = SubResource("BoxMesh_wnm72")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="window" type="MeshInstance3D" parent="StaticBody3D/building5"]
+transform = Transform3D(1.2, 0, 0, 0, 0.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("CylinderMesh_uuhwy")
+skeleton = NodePath("../../..")
 
 [node name="Town Menu" type="Control" parent="."]
 layout_mode = 3
@@ -67,6 +107,8 @@ offset_top = 14.0
 offset_right = 142.0
 offset_bottom = 43.0
 text = "This is a town"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [connection signal="mouse_entered" from="StaticBody3D" to="." method="_on_static_body_3d_mouse_entered"]
 [connection signal="mouse_exited" from="StaticBody3D" to="." method="_on_static_body_3d_mouse_exited"]

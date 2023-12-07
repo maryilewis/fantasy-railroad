@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://blw771httbw02"]
+[gd_scene load_steps=9 format=3 uid="uid://blw771httbw02"]
+
+[ext_resource type="Material" uid="uid://col5moqh4jiq2" path="res://Square Scenes/materials/tree green.tres" id="1_ee1p1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
 
@@ -8,17 +10,17 @@ albedo_color = Color(0.196078, 0.356863, 0.176471, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_v0745"]
 material = SubResource("StandardMaterial3D_sk78h")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wxws"]
-albedo_color = Color(0.054902, 0.223529, 0.176471, 1)
-
 [sub_resource type="PrismMesh" id="PrismMesh_th55h"]
-material = SubResource("StandardMaterial3D_0wxws")
+material = ExtResource("1_ee1p1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpkik"]
 albedo_color = Color(0.364706, 0.231373, 0.141176, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_awfmf"]
 material = SubResource("StandardMaterial3D_cpkik")
+
+[sub_resource type="SphereMesh" id="SphereMesh_s4uno"]
+material = ExtResource("1_ee1p1")
 
 [node name="Forest" type="Node3D"]
 
@@ -30,10 +32,20 @@ shape = SubResource("BoxShape3D_6dlx2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
 mesh = SubResource("BoxMesh_v0745")
 
-[node name="tree" type="MeshInstance3D" parent="."]
+[node name="triangle tree" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.2, 0, 1, 0)
 mesh = SubResource("PrismMesh_th55h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.25, 0, 0, 0, 0.1, 0, 0.5, 0)
+[node name="trunk" type="MeshInstance3D" parent="triangle tree"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, -0.75, 0)
 mesh = SubResource("CylinderMesh_awfmf")
+skeleton = NodePath("../..")
+
+[node name="circle tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.4, 0.4, 0.9, 0)
+mesh = SubResource("SphereMesh_s4uno")
+
+[node name="trunk" type="MeshInstance3D" parent="circle tree"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.55, 0)
+mesh = SubResource("CylinderMesh_awfmf")
+skeleton = NodePath("../..")
