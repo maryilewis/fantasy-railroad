@@ -15,8 +15,11 @@ var current_road: RoadNode
 var current_j = 2
 var direction = -1
 
+var my_camera: MaryWorldCamera
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	my_camera = $Camera3D
 	create_map()
 	train_instance = $Train
 	move_train_along()
@@ -66,3 +69,8 @@ func _process(_delta):
 			current_j += direction
 		move_train_along()
 		
+
+
+func _on_train_input_event(_camera, event, _position, _normal, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		my_camera.set_follow_ref(train_instance)

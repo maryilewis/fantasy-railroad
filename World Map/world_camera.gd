@@ -1,6 +1,7 @@
 class_name MaryWorldCamera extends Camera3D
 
 var _following = false
+var _follow_ref: Node3D
 
 # Movement state
 var _direction = Vector3(0.0, 0.0, 0.0)
@@ -48,7 +49,9 @@ func _input(event):
 func _process(_delta):
 	if (!_following):
 		_update_movement()
-		_update_zoom()
+	else:
+		_update_follow_movement()
+	_update_zoom()
 
 func _update_zoom():
 	size += _zoom
@@ -65,3 +68,12 @@ func _update_movement():
 		var speed = size/20.0
 		var _move = _direction * speed
 		translate(_move)
+
+func set_follow_ref(ref):
+	_follow_ref = ref
+	_following = true
+
+func _update_follow_movement():
+	print("go go go")
+	global_position.x = _follow_ref.global_position.x + 5
+	global_position.z = _follow_ref.global_position.z + 5

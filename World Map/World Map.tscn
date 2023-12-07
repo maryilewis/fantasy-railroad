@@ -27,3 +27,5 @@ script = ExtResource("2_mbkis")
 [node name="underground" parent="." instance=ExtResource("4_hp1to")]
 
 [node name="Train" parent="." instance=ExtResource("3_rk0v2")]
+
+[connection signal="input_event" from="Train" to="." method="_on_train_input_event"]
