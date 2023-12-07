@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp5fqk35e1do0"]
+[gd_scene load_steps=6 format=3 uid="uid://dp5fqk35e1do0"]
+
+[ext_resource type="Script" path="res://Square Scenes/road.gd" id="1_dbjrr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
 
@@ -16,6 +18,7 @@ _data = {
 point_count = 2
 
 [node name="Road" type="Node3D"]
+script = ExtResource("1_dbjrr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
