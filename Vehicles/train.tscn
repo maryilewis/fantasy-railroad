@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0oi384hcdjy7"]
+[gd_scene load_steps=9 format=3 uid="uid://d0oi384hcdjy7"]
 
 [ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="1_5ry6f"]
+[ext_resource type="Script" path="res://Vehicles/train.gd" id="1_l5udi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xhrlj"]
 
@@ -28,6 +29,7 @@ radius = 0.05
 height = 0.1
 
 [node name="Train" type="StaticBody3D"]
+script = ExtResource("1_l5udi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_xhrlj")
@@ -51,3 +53,4 @@ draw_pass_1 = SubResource("SphereMesh_crji2")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.756234, -0.276656)
+shadow_enabled = true

@@ -17,4 +17,4 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-WorldMapData="*res://Autoloads/world_map_data.gd"
+GameData="*res://Autoloads/game_data.gd"

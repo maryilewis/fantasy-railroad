@@ -1,12 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bul1gy2jsfada"]
 
+[ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="1_bx5lb"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk78h"]
-albedo_color = Color(0.47451, 0.776471, 0.435294, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_v0745"]
-material = SubResource("StandardMaterial3D_sk78h")
+material = ExtResource("1_bx5lb")
 
 [node name="Flat" type="Node3D"]
 

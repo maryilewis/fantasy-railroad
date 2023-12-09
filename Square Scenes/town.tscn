@@ -80,7 +80,7 @@ mesh = SubResource("CylinderMesh_uuhwy")
 skeleton = NodePath("../../..")
 
 [node name="building5" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0182981, 0.962251, 0.0103708)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0182981, 0.712785, 0.0103708)
 mesh = SubResource("BoxMesh_wnm72")
 skeleton = NodePath("../CollisionShape3D")
 
