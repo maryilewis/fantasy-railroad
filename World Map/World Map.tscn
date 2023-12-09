@@ -15,7 +15,7 @@ shadow_opacity = 0.5
 directional_shadow_max_distance = 15.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612372, 10, 5, 10)
 projection = 1
 size = 15.0
 far = 200.0
@@ -24,5 +24,3 @@ script = ExtResource("2_mbkis")
 [node name="underground" parent="." instance=ExtResource("4_hp1to")]
 
 [node name="Train" parent="." instance=ExtResource("3_rk0v2")]
-
-[connection signal="input_event" from="Train" to="." method="_on_train_input_event"]

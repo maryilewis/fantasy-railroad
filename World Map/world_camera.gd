@@ -97,5 +97,5 @@ func set_follow_ref(ref):
 	_following = true
 
 func _update_follow_movement():
-	global_position.x = _follow_ref.global_position.x + 5
+	global_position.x = _follow_ref.global_position.x + 5 #TODO better number
 	global_position.z = _follow_ref.global_position.z + 5

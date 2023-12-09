@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctipyjs1jr8is"]
 
 [ext_resource type="Script" path="res://Square Scenes/town.gd" id="1_2tgbh"]
+[ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="2_56gnl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
 
@@ -16,17 +17,8 @@ albedo_color = Color(0.239216, 0.266667, 0.321569, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_wnm72"]
 material = SubResource("StandardMaterial3D_fbt1a")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhjav"]
-transparency = 1
-albedo_color = Color(1, 1, 0.792157, 0.803922)
-metallic = 0.15
-roughness = 0.0
-emission_enabled = true
-emission = Color(0.94902, 0.92549, 0.752941, 1)
-clearcoat_enabled = true
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_uuhwy"]
-material = SubResource("StandardMaterial3D_bhjav")
+material = ExtResource("2_56gnl")
 
 [node name="Town" type="Node3D"]
 script = ExtResource("1_2tgbh")

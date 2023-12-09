@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsb8setqnoqil"]
+
+[ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="2_21c45"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vlhj0"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h0m5o"]
+material = ExtResource("2_21c45")
+
+[sub_resource type="BoxMesh" id="BoxMesh_02omk"]
+material = ExtResource("2_21c45")
+
+[node name="Train Car" type="RigidBody3D"]
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.125, 0, 0, 0, 0.5, 0, 0.07, 0)
+shape = SubResource("ConvexPolygonShape3D_vlhj0")
+
+[node name="Engine" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_h0m5o")
+skeleton = NodePath("../..")
+
+[node name="Link1" type="MeshInstance3D" parent="CollisionShape3D/Engine"]
+transform = Transform3D(0.08, 0, 0, 0, 0.16, 0, 0, 0, 0.2, 0, 0.343241, -0.594369)
+mesh = SubResource("BoxMesh_02omk")
+skeleton = NodePath("")
+
+[node name="Link2" type="MeshInstance3D" parent="CollisionShape3D/Engine"]
+transform = Transform3D(0.08, 0, 0, 0, 0.16, 0, 0, 0, 0.2, 0, 0.343241, 0.596978)
+mesh = SubResource("BoxMesh_02omk")
+skeleton = NodePath("")

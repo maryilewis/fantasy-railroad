@@ -1,14 +1,18 @@
 extends Node
 
+#region camera
+var world_camera: Camera3D
+#endregion
+
 #region map
-# terrain
 @onready var flat = preload("res://Square Scenes/flat.tscn")
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water.tscn")
 @onready var town = preload("res://Square Scenes/town.tscn")
 @onready var road = preload("res://Square Scenes/road.tscn")
+#@onready var road = preload("res://Square Scenes/road.tscn")
 var map_plan = []
-var map_nodes = []
+var map_nodes = [] 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0oi384hcdjy7"]
+[gd_scene load_steps=13 format=3 uid="uid://d0oi384hcdjy7"]
 
 [ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="1_5ry6f"]
 [ext_resource type="Script" path="res://Vehicles/train.gd" id="1_l5udi"]
+[ext_resource type="PackedScene" uid="uid://dsb8setqnoqil" path="res://Vehicles/traincar.tscn" id="3_guusj"]
+[ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="4_mrrae"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xhrlj"]
 
@@ -28,22 +30,34 @@ material = SubResource("StandardMaterial3D_tjwt5")
 radius = 0.05
 height = 0.1
 
-[node name="Train" type="StaticBody3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_on8jy"]
+material = ExtResource("1_5ry6f")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yunu6"]
+material = ExtResource("4_mrrae")
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114045, 0.341814)
+
+[node name="Train Car" parent="." instance=ExtResource("3_guusj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00706071, 0.626057)
+
+[node name="Train" type="StaticBody3D" parent="."]
 script = ExtResource("1_l5udi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Train"]
 shape = SubResource("BoxShape3D_xhrlj")
 
-[node name="Engine" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="Engine" type="MeshInstance3D" parent="Train/CollisionShape3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.125, 0)
 mesh = SubResource("BoxMesh_h0m5o")
 skeleton = NodePath("../..")
 
-[node name="Smokestack" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.29611, 0)
+[node name="Smokestack" type="MeshInstance3D" parent="Train/CollisionShape3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.29611, -0.131663)
 mesh = SubResource("BoxMesh_undsm")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="CollisionShape3D/Smokestack"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Train/CollisionShape3D/Smokestack"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.01308, 0)
 transparency = 0.51
 visibility_range_fade_mode = 2
@@ -51,6 +65,22 @@ amount = 4
 process_material = SubResource("ParticleProcessMaterial_bw5mf")
 draw_pass_1 = SubResource("SphereMesh_crji2")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="Link2" type="MeshInstance3D" parent="Train/CollisionShape3D"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.1, 0, 0.103501, 0.298489)
+mesh = SubResource("BoxMesh_on8jy")
+skeleton = NodePath("../../PinJoint3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Train/CollisionShape3D"]
+transform = Transform3D(1.91069e-16, 4.37114e-10, 0.1, 0.1, -4.37114e-10, 0, 4.37114e-09, 0.01, -4.37114e-09, 0, 0.113159, -0.250092)
+mesh = SubResource("CylinderMesh_yunu6")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Train"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.756234, -0.276656)
 shadow_enabled = true
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Train"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100739, 0.341814)
+node_a = NodePath("..")
+node_b = NodePath("../../Train Car")
+
+[connection signal="input_event" from="Train" to="Train" method="_on_input_event"]
