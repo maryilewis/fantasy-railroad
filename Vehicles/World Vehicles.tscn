@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn61pw2pdamn2"]
-
-[ext_resource type="Script" path="res://Vehicles/world_vehicles.gd" id="1_mvq53"]
-
-[node name="World Vehicles" type="Node3D"]
-script = ExtResource("1_mvq53")

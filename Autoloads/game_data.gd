@@ -12,7 +12,7 @@ var world_camera: Camera3D
 @onready var road = preload("res://Square Scenes/road.tscn")
 #@onready var road = preload("res://Square Scenes/road.tscn")
 var map_plan = []
-var map_nodes = [] 
+var map_nodes = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,7 +49,10 @@ func create_map():
 				'r':
 					new_square = road.instantiate()
 			new_square.position = Vector3(i, 0, j)
+			new_square.map_x = i
+			new_square.map_y = j
 			add_child(new_square)
+			print(i, ", ", j, new_square.isTraversible)
 			GameData.map_nodes[i].append(new_square)
 
 #endregion

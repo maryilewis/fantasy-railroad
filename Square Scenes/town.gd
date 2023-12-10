@@ -1,4 +1,4 @@
-extends Node3D
+class_name TownNode extends TraversibleNode
 
 # TODO: a static menu that just shows info about what you're hovering
 

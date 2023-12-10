@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bul1gy2jsfada"]
+[gd_scene load_steps=5 format=3 uid="uid://bul1gy2jsfada"]
 
 [ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="1_bx5lb"]
+[ext_resource type="Script" path="res://Square Scenes/flat.gd" id="1_hwhxo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v0745"]
 material = ExtResource("1_bx5lb")
 
-[node name="Flat" type="StaticBody3D"]
+[node name="Flat" type="Node3D"]
+script = ExtResource("1_hwhxo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Flat" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat"]
 shape = SubResource("BoxShape3D_6dlx2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
 mesh = SubResource("BoxMesh_v0745")

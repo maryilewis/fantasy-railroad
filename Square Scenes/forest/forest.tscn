@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://blw771httbw02"]
+[gd_scene load_steps=7 format=3 uid="uid://blw771httbw02"]
 
 [ext_resource type="PackedScene" uid="uid://ikvubdqmek" path="res://Square Scenes/forest/triangle_tree.tscn" id="1_ki4ad"]
 [ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="1_q41jc"]
+[ext_resource type="Script" path="res://Square Scenes/forest/forest.gd" id="1_xenan"]
 [ext_resource type="PackedScene" uid="uid://bbn18x8mjjeny" path="res://Square Scenes/forest/circle_tree.tscn" id="2_symwy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
@@ -10,6 +11,7 @@
 material = ExtResource("1_q41jc")
 
 [node name="Forest" type="Node3D"]
+script = ExtResource("1_xenan")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
