@@ -16,6 +16,7 @@ curve = SubResource("Curve3D_8o802")
 [node name="PathFollowEW" type="PathFollow3D" parent="PathEW"]
 transform = Transform3D(-0.00564952, 0, -0.999973, 0, 1, 0, 0.999973, 0, -0.00564952, -0.434439, 0, -0.0136887)
 progress = 0.0857868
+loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathEW/PathFollowEW"]
 
@@ -26,5 +27,6 @@ curve = SubResource("Curve3D_8o802")
 [node name="PathFollowWE" type="PathFollow3D" parent="PathWE"]
 transform = Transform3D(-0.00564952, 0, -0.999973, 0, 1, 0, 0.999973, 0, -0.00564952, -0.434439, 0, -0.0136887)
 progress = 0.0857868
+loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathWE/PathFollowWE"]
