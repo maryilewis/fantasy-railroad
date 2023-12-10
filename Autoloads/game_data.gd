@@ -4,12 +4,14 @@ extends Node
 var world_camera: Camera3D
 #endregion
 
+signal map_updated
+
 #region map
-@onready var flat = preload("res://Square Scenes/flat.tscn")
+@onready var flat = preload("res://Square Scenes/flat/flat.tscn")
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water.tscn")
-@onready var town = preload("res://Square Scenes/town.tscn")
-@onready var road = preload("res://Square Scenes/road.tscn")
+@onready var town = preload("res://Square Scenes/town/town.tscn")
+@onready var road = preload("res://Square Scenes/road/road.tscn")
 #@onready var road = preload("res://Square Scenes/road.tscn")
 var map_plan = []
 var map_nodes = []
@@ -23,9 +25,9 @@ func init_map_data():
 	map_plan.append(['.', '.', '.', '.', 'w', '.', '.', '.', '.', '.'])
 	map_plan.append(['.', '.', '.', '.', 'w', 'w', '.', '.', '.', '.'])
 	map_plan.append(['.', '.', '.', 'f', 'f', 'w', 'w', '.', '.', '.'])
-	map_plan.append(['.', '.', 'f', 'f', 'f', 'f', 'w', '.', 'r', '.'])
-	map_plan.append(['.', '.', '.', 'f', 'f', 'f', 'w', 'r', 'r', '.'])
-	map_plan.append(['.', '.', '.', '.', 'f', '.', 'w', 'r', '.', '.'])
+	map_plan.append(['.', '.', 'f', 'f', 'f', 'r', 'r', 'r', 'r', '.'])
+	map_plan.append(['.', '.', '.', 'f', 'f', 'f', 'w', '.', 'r', '.'])
+	map_plan.append(['.', '.', '.', '.', 'f', '.', 'w', '.', 'r', '.'])
 	map_plan.append(['.', 't', 'r', 'r', 'r', 'r', 'r', 'r', 't', '.'])
 	map_plan.append(['.', '.', '.', '.', '.', 'f', 'w', '.', '.', '.'])
 	map_plan.append(['w', 'w', '.', '.', '.', '.', 'w', 'w', 'f', '.'])
@@ -51,8 +53,12 @@ func create_map():
 			new_square.position = Vector3(i, 0, j)
 			new_square.map_x = i
 			new_square.map_y = j
+			if (new_square.is_traversible()):
+				connect("map_updated", new_square.evaluate_visible_roads)
 			add_child(new_square)
 			GameData.map_nodes[i].append(new_square)
+	# send signal that map is initialized
+	emit_signal("map_updated")
 
 #endregion
 

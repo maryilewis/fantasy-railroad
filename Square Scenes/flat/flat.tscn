@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccjoliw6n063a"]
+
+[ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_5g21s"]
+[ext_resource type="Script" path="res://Square Scenes/flat/flat.gd" id="2_coa7w"]
+
+[node name="base" instance=ExtResource("1_5g21s")]
+script = ExtResource("2_coa7w")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://blycrshveipup"]
+
+[ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_10sw8"]
+[ext_resource type="PackedScene" uid="uid://cm06jicijey5l" path="res://Square Scenes/paths.tscn" id="2_k3lar"]
+[ext_resource type="Script" path="res://Square Scenes/town/town_script.gd" id="2_np5ue"]
+
+[node name="Town" instance=ExtResource("1_10sw8")]
+script = ExtResource("2_np5ue")
+
+[node name="Paths" parent="." index="1" instance=ExtResource("2_k3lar")]

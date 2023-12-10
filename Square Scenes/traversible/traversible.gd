@@ -9,11 +9,25 @@ var path_refs = {}
 # TODO set up variables to avoid lots of $ and typing
 # TODO set loop to false?
 
+func is_traversible():
+	return true
+
 func _init():
 	isTraversible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_init_path_refs()
+	_init_visible_road()
+
+func _init_visible_road():
+	$"Visible Roads".map_x = map_x
+	$"Visible Roads".map_y = map_y
+	
+func evaluate_visible_roads():
+	$"Visible Roads".evaluate_visible_roads()
+
+func _init_path_refs():
 	path_refs = {
 		"ew": {
 			"follow": $Paths/PathEW/PathFollow3D,
@@ -64,8 +78,6 @@ func _ready():
 			"transform": $Paths/PathNW/PathFollow3D/RemoteTransform3D
 		},
 	}
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	for key in path_refs:

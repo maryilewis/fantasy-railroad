@@ -1,5 +1,8 @@
 class_name Train extends Node3D
 
+# TODO if at destination, stop at 50% progress
+# TODO if starting from stop, start at 50% progress
+
 var destination_position: Vector2
 var location: Vector2
 var train_path = []
@@ -75,6 +78,7 @@ func find_adjacent_roads(x, y, visited_nodes):
 
 func place_train(x, y):
 	current_road = GameData.map_nodes[x][y]
+	# TODO use existing direction logic
 	current_road_path_key = "ew"
 	train_progress = current_road.add_path_child(current_road_path_key, self)
 	train_progress.progress_ratio = .5

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://7iokhd5drcc6"]
-
-[ext_resource type="PackedScene" uid="uid://cm06jicijey5l" path="res://Square Scenes/paths.tscn" id="1_42vll"]
-[ext_resource type="Script" path="res://Square Scenes/traversible.gd" id="1_val0u"]
-
-[node name="Traversible" type="Node3D"]
-script = ExtResource("1_val0u")
-
-[node name="Paths" parent="." instance=ExtResource("1_42vll")]
