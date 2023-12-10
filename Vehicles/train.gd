@@ -6,6 +6,7 @@ var train_path = []
 var train_instance
 var train_progress: PathFollow3D
 var current_road: TraversibleNode
+var current_road_path_key
 var current_train_index = 0
 var direction = -1
 
@@ -13,8 +14,8 @@ var my_camera: MaryWorldCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(6,7)
-	set_destination(6,2)
+	place_train(6,2)
+	set_destination(3, 8)
 
 func _create_test_train_path():
 	for i in range(10):
@@ -74,16 +75,70 @@ func find_adjacent_roads(x, y, visited_nodes):
 
 func place_train(x, y):
 	current_road = GameData.map_nodes[x][y]
-	train_progress = current_road.add_path_child_ew(self)
+	current_road_path_key = "ew"
+	train_progress = current_road.add_path_child(current_road_path_key, self)
 	train_progress.progress_ratio = .5
 
 func move_train_along():
+	var prev_x
+	var prev_y
+	var next_x
+	var next_y
+	var curr_x
+	var curr_y
+	var entry_point
+	var exit_point
 	if (current_road != null):
-		current_road.remove_path_child()
+		prev_x = current_road.map_x
+		prev_y = current_road.map_y
+		current_road.remove_path_child(current_road_path_key)
 	current_road = train_path[0]
+	curr_x = current_road.map_x
+	curr_y = current_road.map_y
+	if (train_path.size() > 1):
+		next_x = train_path[1].map_x
+		next_y = train_path[1].map_y
 	# TODO figure out direction logic by comparing map_x and y of previous, current, and next road
-	train_progress = current_road.add_path_child_ew(self)
+	if (prev_x):
+		if (prev_y < curr_y):
+			entry_point = "n"
+		elif (prev_y > curr_y):
+			entry_point = "s"
+		elif (prev_x < curr_x):
+			entry_point = "w"
+		elif (prev_x > curr_x):
+			entry_point = "e"
 
+	if (next_x):
+		if (next_y < curr_y):
+			exit_point = "n"
+		elif (next_y > curr_y):
+			exit_point = "s"
+		elif (next_x < curr_x):
+			exit_point = "w"
+		elif (next_x > curr_x):
+			exit_point = "e"
+
+	if (entry_point and not exit_point):
+		exit_point = _get_opposite(entry_point)
+	elif (exit_point and not entry_point):
+		entry_point = _get_opposite(exit_point)
+		
+	current_road_path_key = entry_point + exit_point
+
+	train_progress = current_road.add_path_child(current_road_path_key, self)
+
+
+func _get_opposite(dir):
+	match dir:
+		'w':
+			return 'e'
+		'e':
+			return 'w'
+		'n':
+			return 's'
+		's':
+			return 'n'
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
