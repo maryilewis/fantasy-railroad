@@ -157,3 +157,4 @@ func _process(_delta):
 func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		GameData.world_camera.set_follow_ref(self)
+		GameData.train_camera.set_follow_ref(self)

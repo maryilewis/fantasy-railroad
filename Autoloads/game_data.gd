@@ -1,7 +1,8 @@
 extends Node
 
 #region camera
-var world_camera: Camera3D
+var world_camera: MaryWorldCamera
+var train_camera: TrainCamera
 #endregion
 
 signal map_updated
