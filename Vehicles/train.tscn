@@ -36,7 +36,7 @@ material = ExtResource("1_5ry6f")
 [sub_resource type="CylinderMesh" id="CylinderMesh_yunu6"]
 material = ExtResource("4_mrrae")
 
-[node name="Node3D" type="Node3D"]
+[node name="Train Scene" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114045, 0.341814)
 
 [node name="Train Car" parent="." instance=ExtResource("3_guusj")]

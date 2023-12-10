@@ -52,7 +52,6 @@ func create_map():
 			new_square.map_x = i
 			new_square.map_y = j
 			add_child(new_square)
-			print(i, ", ", j, new_square.isTraversible)
 			GameData.map_nodes[i].append(new_square)
 
 #endregion
