@@ -8,7 +8,7 @@ albedo_color = Color(0.14902, 0.109804, 0.0862745, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_v0745"]
 material = SubResource("StandardMaterial3D_sk78h")
 
-[node name="Water" type="Node3D"]
+[node name="Underground" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

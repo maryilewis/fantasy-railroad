@@ -19,8 +19,9 @@ var train_name = _get_random_train_name()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(6,2)
-	set_destination(3, 8)
+	place_train(50,51)
+	set_destination(46,51)
+	pass
 
 
 func _create_test_train_path():
@@ -62,13 +63,17 @@ func find_shortest_path(start_node, destination):
 	return []
 	
 
-
 func find_adjacent_roads(x, y, visited_nodes):
 	var adjacent_roads = []
 	for offset in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
 		var map_x = x + offset[0]
 		var map_y = y + offset[1]
-		if (GameData.map_nodes[map_x][map_y].isTraversible and not visited_nodes.has([map_x,map_y])):
+		if (map_y >= 0 \
+		and map_x >= 0 \
+		and map_x < GameData.map_nodes.size() \
+		and map_y < GameData.map_nodes[map_x].size() \
+		and GameData.map_nodes[map_x][map_y].isTraversible \
+		and not visited_nodes.has([map_x,map_y])):
 			adjacent_roads.append(GameData.map_nodes[map_x][map_y])
 			visited_nodes.append([map_x,map_y])
 	return adjacent_roads
