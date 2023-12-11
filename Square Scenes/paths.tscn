@@ -47,7 +47,7 @@ loop = false
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathNS/PathFollow3D"]
 
 [node name="PathSN" type="Path3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 curve = SubResource("Curve3D_8o802")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathSN"]

@@ -19,5 +19,6 @@ shape = SubResource("BoxShape3D_8gxxu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
 mesh = SubResource("BoxMesh_cuw3c")
 
+[connection signal="input_event" from="Flat" to="." method="_on_flat_input_event"]
 [connection signal="mouse_entered" from="Flat" to="." method="_on_hover"]
 [connection signal="mouse_exited" from="Flat" to="." method="_on_unhover"]

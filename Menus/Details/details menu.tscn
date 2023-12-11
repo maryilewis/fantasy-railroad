@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfwed8hr6ogs4"]
+
+[ext_resource type="Script" path="res://Menus/Details/details menu.gd" id="1_4pmgl"]
+[ext_resource type="Theme" uid="uid://da3vu24tysrq3" path="res://Menus/Themes/details_theme.tres" id="1_fkumv"]
+[ext_resource type="Script" path="res://World Map/train_camera.gd" id="2_8sijn"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -32.0
+offset_right = 42.0
+offset_bottom = 8.0
+script = ExtResource("1_4pmgl")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 205.0
+offset_bottom = 681.0
+
+[node name="Trains" type="Panel" parent="TabContainer"]
+layout_mode = 2
+theme = ExtResource("1_fkumv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Trains"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TabContainer/Trains/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="TabContainer/Trains/VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 150)
+render_target_update_mode = 4
+
+[node name="TrainCam" type="Camera3D" parent="TabContainer/Trains/VBoxContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 10, 5, 10)
+projection = 1
+size = 2.0
+far = 200.0
+script = ExtResource("2_8sijn")
+
+[node name="Destination Button" type="Button" parent="TabContainer/Trains/VBoxContainer"]
+layout_mode = 2
+text = "Change Destination"
+
+[node name="Jobs" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="TabContainer/Trains/VBoxContainer/Destination Button" to="." method="_on_destination_button_pressed"]

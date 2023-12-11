@@ -93,3 +93,7 @@ func add_path_child(key, node):
 	path_refs[key]["transform"].remote_path = node.get_path()
 	return path_refs[key]["follow"]
 
+func _on_click():
+	# if global is assigning destination, set it to self
+	GameData.set_train_destination(self)
+

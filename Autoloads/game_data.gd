@@ -5,9 +5,34 @@ var world_camera: MaryWorldCamera
 var train_camera: TrainCamera
 #endregion
 
-signal map_updated
+#region cursor states
+enum CursorState {FREE, SELECTING_TRAIN_DESTINATION}
+var cursor_state: CursorState = CursorState.FREE
+
+# escape and maybe right click should trigger this
+func free_cursor():
+	cursor_state = CursorState.FREE
+#endregion
+
+#region direct trains
+var target_train: Train
+
+func set_selecting_train_destination():
+	cursor_state = CursorState.SELECTING_TRAIN_DESTINATION
+
+func set_target_train(node):
+	target_train = node
+
+func set_train_destination(node):
+	if (cursor_state == CursorState.SELECTING_TRAIN_DESTINATION):
+		cursor_state = CursorState.FREE
+		target_train.set_destination(node.map_x, node.map_y)
+
+#endregion
 
 #region map
+signal map_updated
+
 @onready var flat = preload("res://Square Scenes/flat/flat.tscn")
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water.tscn")
@@ -25,9 +50,9 @@ func _ready():
 func init_map_data():
 	map_plan.append(['.', '.', '.', '.', 'w', '.', '.', '.', '.', '.'])
 	map_plan.append(['.', '.', '.', '.', 'w', 'w', '.', '.', '.', '.'])
-	map_plan.append(['.', '.', '.', 'f', 'f', 'w', 'w', '.', '.', '.'])
-	map_plan.append(['.', '.', 'f', 'f', 'f', 'r', 'r', 'r', 'r', '.'])
-	map_plan.append(['.', '.', '.', 'f', 'f', 'f', 'w', '.', 'r', '.'])
+	map_plan.append(['.', '.', 'r', 'r', 'r', 'w', 'w', '.', '.', '.'])
+	map_plan.append(['.', '.', 'r', 'f', 'r', 'r', 'r', 'r', 'r', '.'])
+	map_plan.append(['.', '.', 'r', 'f', 'f', 'f', 'w', '.', 'r', '.'])
 	map_plan.append(['.', '.', '.', '.', 'f', '.', 'w', '.', 'r', '.'])
 	map_plan.append(['.', 't', 'r', 'r', 'r', 'r', 'r', 'r', 't', '.'])
 	map_plan.append(['.', '.', '.', '.', '.', 'f', 'w', '.', '.', '.'])

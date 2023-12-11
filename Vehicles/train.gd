@@ -15,10 +15,13 @@ var direction = -1
 
 var my_camera: MaryWorldCamera
 
+var train_name = _get_random_train_name()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	place_train(6,2)
 	set_destination(3, 8)
+
 
 func _create_test_train_path():
 	for i in range(10):
@@ -28,17 +31,11 @@ func _create_test_train_path():
 				var road = GameData.map_nodes[i][j]
 				train_path.append(road)
 
+
 func set_destination(x, y):
 	train_path = [GameData.map_nodes[x][y]]
 	train_path = find_shortest_path(current_road, [x, y])
-	# get all roads in map_nodes
-	# creade a lookup of the distance value for all roads
-	# step = 1
-	# starting with destination, find all adjacent roads if they don't have a distance value
-	# # assign them a value of step
-	# # add them to a list of nodes to check next
-	
-	#train_path.push_front()
+
 
 func find_shortest_path(start_node, destination):
 	var visited_nodes = []
@@ -102,7 +99,7 @@ func move_train_along():
 	if (train_path.size() > 1):
 		next_x = train_path[1].map_x
 		next_y = train_path[1].map_y
-	# TODO figure out direction logic by comparing map_x and y of previous, current, and next road
+	# figure out direction logic by comparing map_x and y of previous, current, and next road
 	if (prev_x):
 		if (prev_y < curr_y):
 			entry_point = "n"
@@ -112,7 +109,6 @@ func move_train_along():
 			entry_point = "w"
 		elif (prev_x > curr_x):
 			entry_point = "e"
-
 	if (next_x):
 		if (next_y < curr_y):
 			exit_point = "n"
@@ -122,14 +118,11 @@ func move_train_along():
 			exit_point = "w"
 		elif (next_x > curr_x):
 			exit_point = "e"
-
 	if (entry_point and not exit_point):
 		exit_point = _get_opposite(entry_point)
 	elif (exit_point and not entry_point):
 		entry_point = _get_opposite(exit_point)
-		
 	current_road_path_key = entry_point + exit_point
-
 	train_progress = current_road.add_path_child(current_road_path_key, self)
 
 
@@ -158,3 +151,9 @@ func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		GameData.world_camera.set_follow_ref(self)
 		GameData.train_camera.set_follow_ref(self)
+
+func _get_random_train_name():
+		var names = ["Wilhelmina", "Emmaline", "Evangeline", "Elizabeth", "Abigail", "Adelaide", "Bridget", "Charlotte", "Delphine", "Frances", "Geraldine", "Henrietta", "Ingrid", "Jane", "Katherine", "Lisa", "Mary", "Nan", "Opal", "Phillipa", "Regina","Sarah", "Theodora", "Ursula", "Veronica", "Zelie"]
+		var rng = RandomNumberGenerator.new()
+		var my_random_number = rng.randi_range(0, names.size())
+		return names[my_random_number - 1]

@@ -14,6 +14,9 @@ func _process(_delta):
 func set_follow_ref(ref):
 	_follow_ref = ref
 	_following = true
+	
+func get_follow_ref():
+	return _follow_ref
 
 func clear_follow_ref():
 	_follow_ref = null

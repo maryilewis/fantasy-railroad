@@ -12,3 +12,12 @@ func _on_hover():
 
 func _on_unhover():
 	pass
+
+func _on_click():
+	print("click base")
+
+func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
+		if event is InputEventMouseButton:
+			if (event.button_index == MOUSE_BUTTON_LEFT):
+				if (event.is_released()):
+					_on_click()

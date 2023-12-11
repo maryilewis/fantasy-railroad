@@ -1,4 +1,5 @@
 class_name FlatNode extends SquareBaseNode
 
 func _on_hover():
-	print("hover flat")
+	#print("hover flat")
+	pass

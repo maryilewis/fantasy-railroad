@@ -6,10 +6,15 @@ class_name TownNode extends TraversibleNode
 func _ready():
 	super()
 
+func _on_click():
+	super()
+	print("town click")
 
 func _on_hover():
-	print("hover town ", map_x,", ", map_y)
+	#print("hover town ", map_x,", ", map_y)
+	pass
 
 
 func _on_unhover():
-	print("unhover town ", map_x,", ", map_y)
+	#print("unhover town ", map_x,", ", map_y)
+	pass
