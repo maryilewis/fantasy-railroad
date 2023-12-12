@@ -1,1 +1,1 @@
-extends SquareBaseNode
+class_name ForestNode extends Buildable

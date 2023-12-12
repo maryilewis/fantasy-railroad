@@ -21,3 +21,6 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			if (event.button_index == MOUSE_BUTTON_LEFT):
 				if (event.is_released()):
 					_on_click()
+
+func get_flat_mesh():
+	return $Flat/CollisionShape3D/MeshInstance3D

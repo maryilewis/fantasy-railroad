@@ -5,6 +5,7 @@ var path_progress = 0
 var speed = .01
 
 var path_refs = {}
+var visible_roads_ref
 
 # TODO set up variables to avoid lots of $ and typing
 # TODO set loop to false?
@@ -17,15 +18,16 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible_roads_ref = $"Visible Roads"
 	_init_path_refs()
 	_init_visible_road()
 
 func _init_visible_road():
-	$"Visible Roads".map_x = map_x
-	$"Visible Roads".map_y = map_y
+	visible_roads_ref.map_x = map_x
+	visible_roads_ref.map_y = map_y
 	
 func evaluate_visible_roads():
-	$"Visible Roads".evaluate_visible_roads()
+	visible_roads_ref.evaluate_visible_roads(true)
 
 func _init_path_refs():
 	path_refs = {

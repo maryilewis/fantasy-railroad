@@ -1,5 +1,2 @@
-class_name FlatNode extends SquareBaseNode
+class_name FlatNode extends Buildable
 
-func _on_hover():
-	#print("hover flat")
-	pass

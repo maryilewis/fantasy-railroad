@@ -1,37 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://blw771httbw02"]
+[gd_scene load_steps=5 format=3 uid="uid://gat4virxqibp"]
 
 [ext_resource type="PackedScene" uid="uid://ikvubdqmek" path="res://Square Scenes/forest/triangle_tree.tscn" id="1_ki4ad"]
-[ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="1_q41jc"]
+[ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_tidbr"]
 [ext_resource type="Script" path="res://Square Scenes/forest/forest.gd" id="1_xenan"]
 [ext_resource type="PackedScene" uid="uid://bbn18x8mjjeny" path="res://Square Scenes/forest/circle_tree.tscn" id="2_symwy"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6dlx2"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_v0745"]
-material = ExtResource("1_q41jc")
-
-[node name="Forest" type="Node3D"]
+[node name="Forest" instance=ExtResource("1_tidbr")]
 script = ExtResource("1_xenan")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Trees" type="MeshInstance3D" parent="." index="1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_6dlx2")
+[node name="triangle tree" parent="Trees" index="0" instance=ExtResource("1_ki4ad")]
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
-mesh = SubResource("BoxMesh_v0745")
-
-[node name="triangle tree" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("1_ki4ad")]
-skeleton = NodePath("../../..")
-
-[node name="circle tree" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("2_symwy")]
+[node name="circle tree" parent="Trees" index="1" instance=ExtResource("2_symwy")]
 transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 0.4, 0.4, 0.9, 0.188282)
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 
-[node name="circle tree2" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("2_symwy")]
+[node name="circle tree2" parent="Trees" index="2" instance=ExtResource("2_symwy")]
 transform = Transform3D(0.3, 0, 0, 0, 0.375, 0, 0, 0, 0.3, -0.267738, 0.770365, -0.316077)
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 
-[node name="triangle tree2" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("1_ki4ad")]
+[node name="triangle tree2" parent="Trees" index="3" instance=ExtResource("1_ki4ad")]
 transform = Transform3D(0.3, 0, 0, 0, 0.375, 0, 0, 0, 0.15, -0.141255, 0.872564, 0.411386)
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")

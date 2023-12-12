@@ -10,6 +10,9 @@ func _on_click():
 	super()
 	print("town click")
 
+func evaluate_visible_roads():
+	visible_roads_ref.evaluate_visible_roads(false)
+
 func _on_hover():
 	#print("hover town ", map_x,", ", map_y)
 	pass

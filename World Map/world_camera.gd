@@ -91,19 +91,12 @@ func _update_movement():
 		var speed = size/20.0
 		var _move = _direction * speed
 		translate(_move)
-		print("My global position", global_position)
-		print("My position", position)
 
 func set_follow_ref(ref):
 	if (size > 20):
 		size = 20
 	_follow_ref = ref
 	_following = true
-	print("--------------------------")
-	print("Follow ref global position", _follow_ref.global_position)
-	print("Follow ref position", _follow_ref.position)
-	print("My global position", global_position)
-	print("My position", position)
 
 func _update_follow_movement():
 	global_position.x = _follow_ref.global_position.x +  50

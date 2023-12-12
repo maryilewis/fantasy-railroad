@@ -19,8 +19,8 @@ var train_name = _get_random_train_name()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(50,51)
-	set_destination(46,51)
+	place_train(50,50)
+	#set_destination(46,51)
 	pass
 
 
