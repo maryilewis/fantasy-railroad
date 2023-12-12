@@ -156,6 +156,7 @@ func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		GameData.world_camera.set_follow_ref(self)
 		GameData.train_camera.set_follow_ref(self)
+		print("clicked train")
 
 func _get_random_train_name():
 		var names = ["Wilhelmina", "Emmaline", "Evangeline", "Elizabeth", "Abigail", "Adelaide", "Bridget", "Charlotte", "Delphine", "Frances", "Geraldine", "Henrietta", "Ingrid", "Jane", "Katherine", "Lisa", "Mary", "Nan", "Opal", "Phillipa", "Regina","Sarah", "Theodora", "Ursula", "Veronica", "Zelie"]

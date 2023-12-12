@@ -68,7 +68,7 @@ draw_pass_1 = SubResource("SphereMesh_crji2")
 [node name="Link2" type="MeshInstance3D" parent="Train/CollisionShape3D"]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.1, 0, 0.103501, 0.298489)
 mesh = SubResource("BoxMesh_on8jy")
-skeleton = NodePath("../../PinJoint3D")
+skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Train/CollisionShape3D"]
 transform = Transform3D(1.91069e-16, 4.37114e-10, 0.1, 0.1, -4.37114e-10, 0, 4.37114e-09, 0.01, -4.37114e-09, 0, 0.113159, -0.250092)
@@ -78,9 +78,10 @@ mesh = SubResource("CylinderMesh_yunu6")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.756234, -0.276656)
 shadow_enabled = true
 
-[node name="PinJoint3D" type="PinJoint3D" parent="Train"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100739, 0.341814)
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Train"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.103058, 0.318236)
 node_a = NodePath("..")
 node_b = NodePath("../../Train Car")
+angular_limit/enable = true
 
 [connection signal="input_event" from="Train" to="Train" method="_on_input_event"]

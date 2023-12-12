@@ -26,9 +26,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		match event.button_index:
 			MOUSE_BUTTON_WHEEL_UP:
-				_zoom = -.5
+				_zoom = -1
 			MOUSE_BUTTON_WHEEL_DOWN:
-				_zoom = .5
+				_zoom = 1
 			MOUSE_BUTTON_MIDDLE:
 				if event.pressed:
 					print("hey")
@@ -77,7 +77,7 @@ func _follow_mouse():
 	translate(Vector3(-mouse_change.x, mouse_change.y, 0))
 
 func _update_zoom():
-	size += _zoom
+	size += _zoom * size / 25
 	_zoom = 0
 
 # Updates camera movement
@@ -91,11 +91,21 @@ func _update_movement():
 		var speed = size/20.0
 		var _move = _direction * speed
 		translate(_move)
+		print("My global position", global_position)
+		print("My position", position)
 
 func set_follow_ref(ref):
+	if (size > 20):
+		size = 20
 	_follow_ref = ref
 	_following = true
+	print("--------------------------")
+	print("Follow ref global position", _follow_ref.global_position)
+	print("Follow ref position", _follow_ref.position)
+	print("My global position", global_position)
+	print("My position", position)
 
 func _update_follow_movement():
-	global_position.x = _follow_ref.global_position.x + 5 #TODO better number
-	global_position.z = _follow_ref.global_position.z + 5
+	global_position.x = _follow_ref.global_position.x +  50
+	global_position.y = _follow_ref.global_position.y + 41 # sqrt(2) * 50 / sqrt(3), trust me
+	global_position.z = _follow_ref.global_position.z + 50
