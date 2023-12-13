@@ -44,17 +44,15 @@ signal map_updated
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water/water.tscn")
 @onready var town = preload("res://Square Scenes/town/town.tscn")
-@onready var road = preload("res://Square Scenes/road/road.tscn")
-#@onready var road = preload("res://Square Scenes/road.tscn")
 var map_plan = []
 var map_nodes = []
-var world_parent
+var map_size = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.seed = 12
 	#init_map_data()
-	init_map_data2(100)
+	init_map_data2(map_size)
 	create_map()
 
 func init_map_data2(size):
@@ -81,7 +79,7 @@ func init_map_data2(size):
 				map_plan[i].append('t')
 			else:
 				map_plan[i].append('.')
-	map_plan[50][50] = 't'
+	map_plan[size/2][size/2] = 't'
 
 func init_map_data():
 	map_plan.append(['.', '.', '.', '.', 'w', '.', '.', '.', '.', '.'])
@@ -111,13 +109,10 @@ func create_map():
 					new_square = forest.instantiate()
 				't':
 					new_square = town.instantiate()
-				'r':
-					new_square = road.instantiate()
 			new_square.position = Vector3(i - size/2, 0, j - size/2)
 			new_square.map_x = i
 			new_square.map_y = j
-			if (new_square.is_traversible()):
-				connect("map_updated", new_square.evaluate_visible_roads)
+			connect("map_updated", new_square.evaluate_visible_roads)
 			GameData.map_nodes[i].append(new_square)
 			add_child(new_square)
 	# send signal that map is initialized
@@ -140,15 +135,7 @@ func get_traversible_neighbors(x, y):
 
 #region building
 func build_road(x, y):
-	var node: Node3D = map_nodes[x][y]
-	map_nodes[x][y] = road.instantiate()
-	map_nodes[x][y].position = Vector3(x - 100/2, 0, y - 100/2) #TODO map size const
-	map_nodes[x][y].map_x = x
-	map_nodes[x][y].map_y = y
-	
-	add_child(map_nodes[x][y])
-	remove_child(node)
-	node.queue_free()
+	map_nodes[x][y].build_road()
 	for friend in get_traversible_neighbors(x, y):
 		friend.evaluate_visible_roads()
 	map_nodes[x][y].evaluate_visible_roads()

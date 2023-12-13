@@ -2,6 +2,14 @@ class_name VisibleRoads extends MeshInstance3D
 
 var map_x
 var map_y
+@onready var west = get_node("West") # TODO try out
+var south
+var east
+var north
+
+func init(x,y):
+	map_x = x
+	map_y = y
 
 func evaluate_visible_roads(show_if_no_connectors):
 	var visible_count = 0
@@ -26,7 +34,14 @@ func evaluate_visible_roads(show_if_no_connectors):
 	else:
 		$South.hide()
 	if (show_if_no_connectors and visible_count == 0):
+		print("show all")
 		$West.show()
 		$East.show()
 		$North.show()
 		$South.show()
+
+func hide_roads():
+	$West.hide()
+	$East.hide()
+	$North.hide()
+	$South.hide()

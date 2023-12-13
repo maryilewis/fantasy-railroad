@@ -8,7 +8,7 @@ var location: Vector2
 var train_path = []
 var train_instance
 var train_progress: PathFollow3D
-var current_road: TraversibleNode
+var current_road: SquareBaseNode
 var current_road_path_key
 var current_train_index = 0
 var direction = -1
@@ -72,7 +72,7 @@ func find_adjacent_roads(x, y, visited_nodes):
 		and map_x >= 0 \
 		and map_x < GameData.map_nodes.size() \
 		and map_y < GameData.map_nodes[map_x].size() \
-		and GameData.map_nodes[map_x][map_y].isTraversible \
+		and GameData.map_nodes[map_x][map_y].is_traversible() \
 		and not visited_nodes.has([map_x,map_y])):
 			adjacent_roads.append(GameData.map_nodes[map_x][map_y])
 			visited_nodes.append([map_x,map_y])

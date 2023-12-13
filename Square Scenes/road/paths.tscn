@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm06jicijey5l"]
+[gd_scene load_steps=5 format=3 uid="uid://cm06jicijey5l"]
 
-[ext_resource type="Curve3D" uid="uid://nwb6ktstb0li" path="res://Square Scenes/paths/ccw_path.tres" id="1_5n6eg"]
-[ext_resource type="Curve3D" uid="uid://chg5iemfjsrbh" path="res://Square Scenes/paths/cw_path.tres" id="2_23sx1"]
+[ext_resource type="Curve3D" uid="uid://nwb6ktstb0li" path="res://Square Scenes/paths/ccw_path.tres" id="1_dxk8e"]
+[ext_resource type="Script" path="res://Square Scenes/road/paths.gd" id="1_hk4gk"]
+[ext_resource type="Curve3D" uid="uid://chg5iemfjsrbh" path="res://Square Scenes/paths/cw_path.tres" id="2_ryixe"]
 
 [sub_resource type="Curve3D" id="Curve3D_8o802"]
 _data = {
@@ -12,13 +13,14 @@ point_count = 2
 
 [node name="Paths" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_hk4gk")
 
 [node name="PathEW" type="Path3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0)
 curve = SubResource("Curve3D_8o802")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathEW"]
-transform = Transform3D(-0.00564951, 0, -0.999972, 0, 1, 0, 0.999972, 0, -0.00564951, -0.434439, 0, -0.0136887)
+transform = Transform3D(-0.00564951, 0, -0.999971, 0, 1, 0, 0.999971, 0, -0.00564951, -0.434439, 0, -0.0136887)
 progress = 0.0857868
 loop = false
 
@@ -29,7 +31,7 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0.5, 
 curve = SubResource("Curve3D_8o802")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathWE"]
-transform = Transform3D(-0.00564951, 0, -0.999972, 0, 1, 0, 0.999972, 0, -0.00564951, -0.434439, 0, -0.0136887)
+transform = Transform3D(-0.00564951, 0, -0.999971, 0, 1, 0, 0.999971, 0, -0.00564951, -0.434439, 0, -0.0136887)
 progress = 0.0857868
 loop = false
 
@@ -40,7 +42,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5
 curve = SubResource("Curve3D_8o802")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathNS"]
-transform = Transform3D(-0.00564951, 0, -0.999972, 0, 1, 0, 0.999972, 0, -0.00564951, -0.434439, 0, -0.0136887)
+transform = Transform3D(-0.00564951, 0, -0.999971, 0, 1, 0, 0.999971, 0, -0.00564951, -0.434439, 0, -0.0136887)
 progress = 0.0857868
 loop = false
 
@@ -51,14 +53,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 curve = SubResource("Curve3D_8o802")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathSN"]
-transform = Transform3D(-0.00564951, 0, -0.999972, 0, 1, 0, 0.999972, 0, -0.00564951, -0.434439, 0, -0.0136887)
+transform = Transform3D(-0.00564951, 0, -0.999971, 0, 1, 0, 0.999971, 0, -0.00564951, -0.434439, 0, -0.0136887)
 progress = 0.0857868
 loop = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathSN/PathFollow3D"]
 
 [node name="PathWN" type="Path3D" parent="."]
-curve = ExtResource("1_5n6eg")
+curve = ExtResource("1_dxk8e")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathWN"]
 transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.995634, 0, 0.5, -0.5)
@@ -67,7 +69,7 @@ transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.9956
 
 [node name="PathSW" type="Path3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-curve = ExtResource("1_5n6eg")
+curve = ExtResource("1_dxk8e")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathSW"]
 transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.995634, 0, 0.5, -0.5)
@@ -76,7 +78,7 @@ transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.9956
 
 [node name="PathES" type="Path3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-curve = ExtResource("1_5n6eg")
+curve = ExtResource("1_dxk8e")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathES"]
 transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.995634, 0, 0.5, -0.5)
@@ -85,7 +87,7 @@ transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.9956
 
 [node name="PathNE" type="Path3D" parent="."]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
-curve = ExtResource("1_5n6eg")
+curve = ExtResource("1_dxk8e")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathNE"]
 transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.995634, 0, 0.5, -0.5)
@@ -93,7 +95,7 @@ transform = Transform3D(-0.995634, 0, 0.0933406, 0, 1, 0, -0.0933406, 0, -0.9956
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathNE/PathFollow3D"]
 
 [node name="PathNW" type="Path3D" parent="."]
-curve = ExtResource("2_23sx1")
+curve = ExtResource("2_ryixe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathNW"]
 transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.0933405, 0.5, 0.5, 0)
@@ -102,7 +104,7 @@ transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.09334
 
 [node name="PathWS" type="Path3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-curve = ExtResource("2_23sx1")
+curve = ExtResource("2_ryixe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathWS"]
 transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.0933405, 0.5, 0.5, 0)
@@ -111,7 +113,7 @@ transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.09334
 
 [node name="PathSE" type="Path3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-curve = ExtResource("2_23sx1")
+curve = ExtResource("2_ryixe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathSE"]
 transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.0933405, 0.5, 0.5, 0)
@@ -120,7 +122,7 @@ transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.09334
 
 [node name="PathEN" type="Path3D" parent="."]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
-curve = ExtResource("2_23sx1")
+curve = ExtResource("2_ryixe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="PathEN"]
 transform = Transform3D(-0.0933405, 0, 0.995634, 0, 1, 0, -0.995634, 0, -0.0933405, 0.5, 0.5, 0)
