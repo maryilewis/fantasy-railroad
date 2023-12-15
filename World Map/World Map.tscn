@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds25bg34pn02h"]
+[gd_scene load_steps=5 format=3 uid="uid://ds25bg34pn02h"]
 
 [ext_resource type="Script" path="res://World Map/world_map.gd" id="1_5q762"]
 [ext_resource type="Script" path="res://World Map/world_camera.gd" id="2_mbkis"]
-[ext_resource type="PackedScene" uid="uid://d0oi384hcdjy7" path="res://Vehicles/train.tscn" id="3_rk0v2"]
 [ext_resource type="PackedScene" uid="uid://cdl5y03o54drt" path="res://World Map/underground.tscn" id="4_hp1to"]
 [ext_resource type="PackedScene" uid="uid://dfwed8hr6ogs4" path="res://Menus/Details/details menu.tscn" id="5_jigrt"]
 
@@ -25,7 +24,5 @@ far = 200.0
 script = ExtResource("2_mbkis")
 
 [node name="underground" parent="." instance=ExtResource("4_hp1to")]
-
-[node name="Train" parent="." instance=ExtResource("3_rk0v2")]
 
 [node name="Control" parent="." instance=ExtResource("5_jigrt")]

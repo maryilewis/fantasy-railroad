@@ -16,16 +16,30 @@ var cursor_state: CursorState = CursorState.FREE
 # escape and maybe right click should trigger this
 func free_cursor():
 	cursor_state = CursorState.FREE
+	for train in trains:
+		train.enable_click()
 	
 func set_selecting_train_destination():
 	cursor_state = CursorState.SELECTING_TRAIN_DESTINATION
+	for train in trains:
+		train.enable_click()
 	
 func set_building():
 	cursor_state = CursorState.BUILDING
+	for train in trains:
+		train.disable_click()
 #endregion
 
 #region direct trains
+@onready var train_ref = preload("res://Vehicles/train.tscn")
 var target_train: Train
+var trains = []
+
+func init_trains():
+	var first_train = train_ref.instantiate()
+	trains.append(first_train)
+	for train in trains:
+		add_child(train)
 
 func set_target_train(node):
 	target_train = node
@@ -51,9 +65,9 @@ var map_size = 100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.seed = 12
-	#init_map_data()
 	init_map_data2(map_size)
 	create_map()
+	init_trains()
 
 func init_map_data2(size):
 	for i in size:

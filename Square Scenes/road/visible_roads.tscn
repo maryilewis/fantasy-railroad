@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bksinyq3m8tkn"]
+[gd_scene load_steps=5 format=3 uid="uid://bksinyq3m8tkn"]
 
 [ext_resource type="Script" path="res://Square Scenes/road/visible_roads.gd" id="1_rwffn"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh22g"]
-albedo_color = Color(0.121569, 0.184314, 0.32549, 1)
+[ext_resource type="Material" uid="uid://4tjna4v7bu7u" path="res://Square Scenes/road/visible_roads.tres" id="2_01ims"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8232e"]
-material = SubResource("StandardMaterial3D_mh22g")
+material = ExtResource("2_01ims")
+
+[sub_resource type="BoxMesh" id="BoxMesh_58wxn"]
+material = ExtResource("2_01ims")
 
 [node name="Visible Roads" type="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.02, 0)
@@ -31,3 +32,7 @@ skeleton = NodePath("../../Paths")
 transform = Transform3D(0.25, 0, 0, 0, 0.05, 0, 0, 0, 0.6, -0.0023457, 0.51, 0.204539)
 mesh = SubResource("BoxMesh_8232e")
 skeleton = NodePath("../../Paths")
+
+[node name="Pole" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_58wxn")

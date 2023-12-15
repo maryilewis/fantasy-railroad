@@ -14,10 +14,10 @@ func init(x,y):
 func evaluate_visible_roads(show_if_no_connectors):
 	var visible_count = 0
 	if(map_x > 0 and GameData.map_nodes[map_x - 1][map_y].is_traversible()):
-		$West.show()
+		west.show()
 		visible_count += 1
 	else:
-		$West.hide()
+		west.hide()
 	if(map_x + 1 < GameData.map_nodes.size() and GameData.map_nodes[map_x + 1][map_y].is_traversible()):
 		$East.show()
 		visible_count += 1
@@ -34,14 +34,13 @@ func evaluate_visible_roads(show_if_no_connectors):
 	else:
 		$South.hide()
 	if (show_if_no_connectors and visible_count == 0):
-		print("show all")
 		$West.show()
 		$East.show()
 		$North.show()
 		$South.show()
 
 func hide_roads():
-	$West.hide()
+	west.hide()
 	$East.hide()
 	$North.hide()
 	$South.hide()

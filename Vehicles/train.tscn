@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0oi384hcdjy7"]
+[gd_scene load_steps=14 format=3 uid="uid://d0oi384hcdjy7"]
 
 [ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="1_5ry6f"]
+[ext_resource type="Script" path="res://Vehicles/train_parent.gd" id="1_7gj0o"]
 [ext_resource type="Script" path="res://Vehicles/train.gd" id="1_l5udi"]
 [ext_resource type="PackedScene" uid="uid://dsb8setqnoqil" path="res://Vehicles/traincar.tscn" id="3_guusj"]
 [ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="4_mrrae"]
@@ -38,6 +39,7 @@ material = ExtResource("4_mrrae")
 
 [node name="Train Scene" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114045, 0.341814)
+script = ExtResource("1_7gj0o")
 
 [node name="Train Car" parent="." instance=ExtResource("3_guusj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00706071, 0.626057)
