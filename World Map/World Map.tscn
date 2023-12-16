@@ -26,6 +26,6 @@ script = ExtResource("2_mbkis")
 
 [node name="underground" parent="." instance=ExtResource("4_hp1to")]
 
-[node name="Control" parent="." instance=ExtResource("5_jigrt")]
-
 [node name="Town Menu" parent="." instance=ExtResource("5_loopm")]
+
+[node name="Details Menu" parent="." instance=ExtResource("5_jigrt")]
