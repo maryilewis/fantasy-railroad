@@ -1,5 +1,7 @@
 class_name TownNode extends SquareBaseNode
 
+
+var display_name ="Cool Town Name"
 # TODO: a static menu that just shows info about what you're hovering
 
 func _ready():

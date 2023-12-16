@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsb8setqnoqil"]
+[gd_scene load_steps=6 format=3 uid="uid://dsb8setqnoqil"]
 
 [ext_resource type="Material" uid="uid://ccqdk0t7rj7j" path="res://Vehicles/Materials/train.tres" id="2_21c45"]
+[ext_resource type="PackedScene" uid="uid://b87lxi3wranap" path="res://Cargo/cargo.tscn" id="2_n2yoe"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vlhj0"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
@@ -31,3 +32,5 @@ skeleton = NodePath("")
 transform = Transform3D(0.08, 0, 0, 0, 0.16, 0, 0, 0, 0.2, 0, 0.343241, 0.596978)
 mesh = SubResource("BoxMesh_02omk")
 skeleton = NodePath("")
+
+[node name="Cargo" parent="." instance=ExtResource("2_n2yoe")]

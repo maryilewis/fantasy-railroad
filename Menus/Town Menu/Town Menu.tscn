@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d37kubne48efi"]
+
+[ext_resource type="Script" path="res://Menus/Town Menu/Town Menu.gd" id="1_i53v6"]
+
+[node name="Town Menu" type="Node2D"]
+script = ExtResource("1_i53v6")
+
+[node name="Pop-up" type="PopupPanel" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Pop-up"]
+offset_right = 100.0
+offset_bottom = 40.0
+text = "You have arrived in"

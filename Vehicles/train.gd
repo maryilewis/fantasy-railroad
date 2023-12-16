@@ -12,10 +12,9 @@ var current_road: SquareBaseNode
 var current_road_path_key
 var current_train_index = 0
 var direction = -1
+var arrived = false
 
 var my_camera: MaryWorldCamera
-
-var train_name = _get_random_train_name()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +35,7 @@ func _create_test_train_path():
 func set_destination(x, y):
 	train_path = [GameData.map_nodes[x][y]]
 	train_path = find_shortest_path(current_road, [x, y])
+	arrived = false
 
 
 func find_shortest_path(start_node, destination):
@@ -145,7 +145,9 @@ func _get_opposite(dir):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if (train_path.size() == 0):
-		pass
+		if !arrived:
+			arrived = true;
+
 	elif (train_progress != null and train_progress.progress_ratio >= .99):
 		train_path.remove_at(0)
 		if (train_path.size() > 0):
@@ -155,11 +157,5 @@ func _process(_delta):
 func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		GameData.world_camera.set_follow_ref(self)
-		GameData.train_camera.set_follow_ref(self)
-		print("clicked train")
+		GameData.train_camera.set_follow_ref(self) #TODO camera train should be the train whose details we're looking at. How are details going to be opened?
 
-func _get_random_train_name():
-		var names = ["Wilhelmina", "Emmaline", "Evangeline", "Elizabeth", "Abigail", "Adelaide", "Bridget", "Charlotte", "Delphine", "Frances", "Geraldine", "Henrietta", "Ingrid", "Jane", "Katherine", "Lisa", "Mary", "Nan", "Opal", "Phillipa", "Regina","Sarah", "Theodora", "Ursula", "Veronica", "Zelie"]
-		var rng = RandomNumberGenerator.new()
-		var my_random_number = rng.randi_range(0, names.size())
-		return names[my_random_number - 1]
