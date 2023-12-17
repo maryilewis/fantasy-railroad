@@ -64,12 +64,16 @@ signal map_updated
 var map_plan = []
 var map_nodes = []
 var map_size = 100
+var towns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("planning map...")
 	rng.seed = 12
 	init_map_data2(map_size)
+	print("creating map...")
 	create_map()
+	print("placing trains...")
 	init_trains()
 
 func init_map_data2(size):
@@ -126,6 +130,7 @@ func create_map():
 					new_square = forest.instantiate()
 				't':
 					new_square = town.instantiate()
+					towns.append(new_square)
 			new_square.position = Vector3(i - size/2, 0, j - size/2)
 			new_square.map_x = i
 			new_square.map_y = j

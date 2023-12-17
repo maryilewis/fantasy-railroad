@@ -1,6 +1,4 @@
-extends Control
-
-#TODO: I think this should be a log and a tooltip
+class_name TownMenu extends Control
 
 var town: TownNode
 
@@ -8,9 +6,10 @@ var town: TownNode
 func _ready():
 	pass # Replace with function body.
 
-func show_menu(_town):
+func set_town(_town):
 	town = _town
-	#$PanelContainer/Panel/MarginContainer/RichTextLabel.text = "You have arrived in " + town.display_name
+	$Panel/VBoxContainer/RichTextLabel.text = "Welcome to " + town.display_name
+
 	#add_button ( String text, bool right=false, String action="" )
 	#for job in list, is it this town and do you have the cargo? if so, add a button (hide when the job is complete)
 	#for export in this town, add a button to pick some up (disabled if you have no room)
@@ -18,3 +17,7 @@ func show_menu(_town):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+
+func _on_close_pressed():
+	MenuService.close_town_menu()

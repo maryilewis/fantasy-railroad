@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://Autoloads/game_data.gd"
+MenuService="*res://Autoloads/menu_service.gd"
+JobService="*res://Autoloads/job_service.gd"
 
 [debug]
 

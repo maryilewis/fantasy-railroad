@@ -1,4 +1,4 @@
-extends Node3D
+class_name Cargo extends Node3D
 
 enum CargoType {RED, BLUE}
 var cargo_type: CargoType

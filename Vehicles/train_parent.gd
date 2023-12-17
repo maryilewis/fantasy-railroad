@@ -1,4 +1,4 @@
-extends Node3D
+class_name TrainParent extends Node3D
 
 var display_name
 
