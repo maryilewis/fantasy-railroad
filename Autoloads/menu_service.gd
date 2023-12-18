@@ -14,7 +14,11 @@ func _ready():
 	print("adding town menu...")
 	town_menu = town_menu_ref.instantiate()
 	add_child(town_menu)
-	#hide_town_menu()
+	close_town_menu()
+
+func show_town_menu(town):
+	town_menu.set_town(town)
+	town_menu.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

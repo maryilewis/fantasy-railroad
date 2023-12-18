@@ -43,6 +43,9 @@ func _ready():
 func connect_job_list_scene(parent):
 	parent.add_child(job_menu)
 
+func get_jobs_by_town(town):
+	return visible_job_list.filter(func(job): return job.town == town)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

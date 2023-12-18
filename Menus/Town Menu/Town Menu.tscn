@@ -55,15 +55,6 @@ text = "Welcome to Town
 "
 fit_content = true
 
-[node name="Complete Job" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "Deliver Cargo $250"
-
-[node name="Pick Up Cargo" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "Pick up cargo
-"
-
 [node name="Close" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 3

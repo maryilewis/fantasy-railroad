@@ -34,4 +34,7 @@ func _random_town_name():
 	var ends = ["burg", "ton", " Town", " City", "ville", "sville", "town", " Place"]
 	var starts = ["Place", "Where", "Here", "There", "Okay", "Well"]
 	return starts[randi() % starts.size()] + ends[randi() % ends.size()]
-	
+
+func _on_click():
+	MenuService.show_town_menu(self)
+
