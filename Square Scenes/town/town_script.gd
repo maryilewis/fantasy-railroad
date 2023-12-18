@@ -31,7 +31,7 @@ func _pick_random_cargo():
 	products.append(cargoArray[randi_range(0, cargoArray.size() - 1)])
 
 func _random_town_name():
-	var ends = ["burg", "ton", " Town", " City", "ville", "sville", "town"]
+	var ends = ["burg", "ton", " Town", " City", "ville", "sville", "town", " Place"]
 	var starts = ["Place", "Where", "Here", "There", "Okay", "Well"]
 	return starts[randi() % starts.size()] + ends[randi() % ends.size()]
 	

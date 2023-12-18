@@ -5,6 +5,7 @@ var visible_job_list = []
 var job_menu
 @onready var job_menu_ref = preload("res://Menus/Job List/Job List.tscn")
 
+
 func _generate_job_list():
 	for town in GameData.towns:
 		for cargo_type in Cargo.CargoType:
@@ -38,7 +39,9 @@ func _ready():
 	_init_visible_job_list()
 	job_menu = job_menu_ref.instantiate()
 	job_menu.set_jobs(visible_job_list)
-	add_child(job_menu)
+	
+func connect_job_list_scene(parent):
+	parent.add_child(job_menu)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

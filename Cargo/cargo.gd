@@ -1,6 +1,6 @@
 class_name Cargo extends Node3D
 
-enum CargoType {RED, BLUE}
+enum CargoType {RED, ORANGE, BLUE}
 var cargo_type: CargoType
 
 var cargo_defs
@@ -10,6 +10,11 @@ func _ready():
 	cargo_defs = {
 		CargoType.RED: {
 			"display_name": "Red",
+			"parent_ref": $Red,
+			"mesh_instance": $Red/MeshInstance3D
+		},
+		CargoType.ORANGE: {
+			"display_name": "Orange",
 			"parent_ref": $Red,
 			"mesh_instance": $Red/MeshInstance3D
 		},
