@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dsb8setqnoqil" path="res://Vehicles/traincar.tscn" id="3_guusj"]
 [ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="4_mrrae"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wa8bi"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_on8jy"]
+material = ExtResource("1_5ry6f")
+
 [sub_resource type="BoxMesh" id="BoxMesh_h0m5o"]
 material = ExtResource("1_5ry6f")
 
@@ -29,13 +35,8 @@ material = SubResource("StandardMaterial3D_tjwt5")
 radius = 0.05
 height = 0.1
 
-[sub_resource type="BoxMesh" id="BoxMesh_on8jy"]
-material = ExtResource("1_5ry6f")
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_yunu6"]
 material = ExtResource("4_mrrae")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xhrlj"]
 
 [node name="Train Scene" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114045, 0.341814)
@@ -44,22 +45,32 @@ script = ExtResource("1_7gj0o")
 [node name="Train Car" parent="." instance=ExtResource("3_guusj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0.626)
 
-[node name="Train" type="StaticBody3D" parent="."]
+[node name="Train" type="MeshInstance3D" parent="."]
+skeleton = NodePath("hinge")
 script = ExtResource("1_l5udi")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Train"]
+[node name="hinge" type="StaticBody3D" parent="Train"]
 
-[node name="Engine" type="MeshInstance3D" parent="Train/MeshInstance3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Train/hinge"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.1, 0, 0.103501, 0.298489)
+shape = SubResource("ConcavePolygonShape3D_wa8bi")
+
+[node name="Link2" type="MeshInstance3D" parent="Train/hinge/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_on8jy")
+skeleton = NodePath("")
+
+[node name="Engine" type="MeshInstance3D" parent="Train"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.125, 0)
 mesh = SubResource("BoxMesh_h0m5o")
-skeleton = NodePath("../..")
+skeleton = NodePath("../hinge")
 
-[node name="Smokestack" type="MeshInstance3D" parent="Train/MeshInstance3D"]
+[node name="Smokestack" type="MeshInstance3D" parent="Train"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.29611, -0.131663)
 mesh = SubResource("BoxMesh_undsm")
-skeleton = NodePath("../../CollisionShape3D3")
+skeleton = NodePath("")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Train/MeshInstance3D/Smokestack"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Train/Smokestack"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.01308, 0)
 transparency = 0.51
 visibility_range_fade_mode = 2
@@ -67,26 +78,17 @@ amount = 4
 process_material = SubResource("ParticleProcessMaterial_bw5mf")
 draw_pass_1 = SubResource("SphereMesh_crji2")
 
-[node name="Link2" type="MeshInstance3D" parent="Train/MeshInstance3D"]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.1, 0, 0.103501, 0.298489)
-mesh = SubResource("BoxMesh_on8jy")
-skeleton = NodePath("")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Train/MeshInstance3D"]
+[node name="Headlight" type="MeshInstance3D" parent="Train"]
 transform = Transform3D(1.91069e-16, 4.37114e-10, 0.1, 0.1, -4.37114e-10, 0, 4.37114e-09, 0.01, -4.37114e-09, 0, 0.113159, -0.250092)
 mesh = SubResource("CylinderMesh_yunu6")
-skeleton = NodePath("../../CollisionShape3D3")
+skeleton = NodePath("")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Train"]
-visible = false
-shape = SubResource("BoxShape3D_xhrlj")
+[node name="HingeJoint3D" type="HingeJoint3D" parent="Train"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.103058, 0.318236)
+node_a = NodePath("../hinge")
+node_b = NodePath("../../Train Car")
+angular_limit/enable = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Train"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.756234, -0.276656)
 shadow_enabled = true
-
-[node name="HingeJoint3D" type="HingeJoint3D" parent="Train"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.103058, 0.318236)
-node_a = NodePath("..")
-node_b = NodePath("../../Train Car")
-angular_limit/enable = true

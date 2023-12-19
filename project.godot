@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Util="*res://Autoloads/util.gd"
 GameData="*res://Autoloads/game_data.gd"
 TrainService="*res://Autoloads/train_service.gd"
-JobService="*res://Autoloads/job_service.gd"
 MenuService="*res://Autoloads/menu_service.gd"
+JobService="*res://Autoloads/job_service.gd"
 CursorService="*res://Autoloads/cursor_service.gd"
+Util="*res://Autoloads/util.gd"
 
 [debug]
 
