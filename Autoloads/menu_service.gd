@@ -30,6 +30,10 @@ func show_town_menu(town):
 #region details menu
 func update_cargo_list():
 	details_menu.update_cargo_list()
+func update_money(money):
+	details_menu.update_money(money)
+func add_job_menu(job_menu):
+	details_menu.add_job_menu(job_menu)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

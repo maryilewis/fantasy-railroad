@@ -33,6 +33,9 @@ anchor_right = 1.0
 offset_bottom = 220.0
 grow_horizontal = 2
 
+[node name="Money Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
+layout_mode = 2
+
 [node name="Follow Train" type="Button" parent="TabContainer/Trains/VBoxContainer"]
 layout_mode = 2
 text = "Watch Train"
@@ -55,7 +58,7 @@ size = 2.0
 far = 200.0
 script = ExtResource("2_8sijn")
 
-[node name="Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
+[node name="Cargo Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
 layout_mode = 2
 
 [node name="Destination Button" type="Button" parent="TabContainer/Trains/VBoxContainer"]

@@ -7,6 +7,7 @@ var path_scene = preload("res://Square Scenes/road/paths.tscn")
 var visible_road_scene = preload("res://Square Scenes/road/visible_roads.tscn")
 var map_x: int
 var map_y: int
+var road_cost = 10
 #endregion
 
 #region traversal info
@@ -47,6 +48,7 @@ func evaluate_visible_roads():
 func _on_click():
 	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		GameData.build_road(map_x, map_y)
+		JobService.pay_for_road(road_cost)
 	elif (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
 		CursorService.set_train_destination(self)
 		

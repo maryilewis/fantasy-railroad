@@ -40,18 +40,29 @@ func _ready():
 	_init_visible_job_list()
 	job_menu = job_menu_ref.instantiate()
 	job_menu.set_jobs(visible_job_list)
-	
-func connect_job_list_scene(parent):
-	parent.add_child(job_menu)
+	MenuService.add_job_menu(job_menu)
+	update_menu_money()
 
 func get_jobs_by_town(town):
 	return visible_job_list.filter(func(job): return job.town == town)
 	
 func complete_job(job):
 	money += job.payment
+	update_menu_money()
 	visible_job_list.erase(job)
 	visible_job_list.append(_job_list.pop_front())
 	job_menu.set_jobs(visible_job_list)
+	
+func pay_for_road(amount):
+	money -= amount
+	update_menu_money()
+
+func can_afford(amount):
+	return money >= amount
+	
+func update_menu_money():
+	MenuService.update_money(money)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
