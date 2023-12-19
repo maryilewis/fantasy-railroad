@@ -16,7 +16,7 @@ func set_town(_town):
 	
 	town = _town
 	$Panel/VBoxContainer/RichTextLabel.text = "Welcome to " + town.display_name
-	
+	#add new butons
 	jobs = JobService.get_jobs_by_town(town)
 	for job in jobs:
 		var button = Button.new()
@@ -32,19 +32,25 @@ func set_town(_town):
 		$Panel/VBoxContainer.add_child(button)
 		button.set_meta("type", "cargo")
 		button.set_meta("cargo", product)
+	evaluate_buttonability()
 
 func evaluate_buttonability():
-	var trains_in_station = town.trains_in_station
+	var train_is_here = TrainService.is_train_at_node(town)
+	var the_train = TrainService.train
 	for child in $Panel/VBoxContainer.get_children():
 		if child.is_class("Button"):
 			match child.get_meta("type"):
 				"job":
 					# if the train in town has the appropriate the cargo, you can complete a job
-					print(child.get_meta("job").cargo)
+					if train_is_here and the_train.has_cargo(child.get_meta("job").cargo):
+						(child as Button).disabled = false
+					else:
+						(child as Button).disabled = true
 				"cargo":
-					# if the train in town has room, you can pick up cargo
-					print("it's a cargo button")
-	pass
+					if train_is_here and the_train.has_room_for_cargo():
+						(child as Button).disabled = false
+					else:
+						(child as Button).disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -54,9 +60,13 @@ func _on_close_pressed():
 	MenuService.close_town_menu()
 	
 func complete_job(job):
-	print(job)
+	var the_train = TrainService.train
+	the_train.drop_off_cargo(job.cargo)
+	JobService.complete_job(job)
+	# TODO disable the button, add a lil checkmark or something
+	# TODO redo buttons entirely to see if there is a new job in town!
 	evaluate_buttonability()
 
 func pick_up_cargo(cargo):
-	print(cargo)
+	TrainService.train.pick_up_cargo(cargo)
 	evaluate_buttonability()

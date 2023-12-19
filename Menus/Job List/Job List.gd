@@ -1,6 +1,9 @@
 class_name JobList extends Control
 
 func set_jobs(jobs):
+	for j in $ScrollContainer/VBoxContainer.get_children():
+		$ScrollContainer/VBoxContainer.remove_child(j)
+		j.queue_free()
 	for job in jobs:
 		var label = Label.new()
 		label.text = "Bring " + job.cargo + " to " + job.town.display_name

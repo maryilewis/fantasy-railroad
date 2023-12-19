@@ -18,7 +18,7 @@ var my_camera: MaryWorldCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(50,50)
+	place_train(12,12)
 	#set_destination(46,51)
 	pass
 
@@ -152,10 +152,3 @@ func _process(_delta):
 		train_path.remove_at(0)
 		if (train_path.size() > 0):
 			move_train_along()
-
-
-func _on_input_event(_camera, event, _position, _normal, _shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		GameData.world_camera.set_follow_ref(self)
-		GameData.train_camera.set_follow_ref(self) #TODO camera train should be the train whose details we're looking at. How are details going to be opened?
-

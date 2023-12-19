@@ -1,8 +1,9 @@
 class_name TrainParent extends Node3D
 
 var display_name
-
 var cargo_list = []
+var capacity = 2
+
 func _ready():
 	display_name = _get_random_train_name()
 
@@ -10,10 +11,25 @@ func get_engine():
 	return $Train
 
 func disable_click():
-	$Train/CollisionShape3D.disabled = true
+	#$Train/CollisionShape3D.disabled = true
+	pass
 func enable_click():
-	$Train/CollisionShape3D.disabled = false
+	#$Train/CollisionShape3D.disabled = false
+	pass
 
+func pick_up_cargo(cargo):
+	cargo_list.append(cargo)
+	MenuService.update_cargo_list()
+
+func drop_off_cargo(cargo):
+	cargo_list.erase(cargo)
+	MenuService.update_cargo_list()
+
+func has_room_for_cargo():
+	return cargo_list.size() < capacity
+
+func has_cargo(cargo):
+	return cargo_list.has(cargo)
 
 # TODO: Remove from list once used
 func _get_random_train_name():

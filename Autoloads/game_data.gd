@@ -9,27 +9,6 @@ var train_camera: TrainCamera
 var rng = RandomNumberGenerator.new()
 #endregion
 
-#region cursor states
-enum CursorState {FREE, SELECTING_TRAIN_DESTINATION, BUILDING}
-var cursor_state: CursorState = CursorState.FREE
-
-# escape and maybe right click should trigger this
-func free_cursor():
-	cursor_state = CursorState.FREE
-	for train in TrainService.trains:
-		train.enable_click()
-	
-func set_selecting_train_destination():
-	cursor_state = CursorState.SELECTING_TRAIN_DESTINATION
-	for train in TrainService.trains:
-		train.enable_click()
-	
-func set_building():
-	cursor_state = CursorState.BUILDING
-	for train in TrainService.trains:
-		train.disable_click()
-#endregion
-
 #region map
 signal map_updated
 
@@ -39,7 +18,7 @@ signal map_updated
 @onready var town = preload("res://Square Scenes/town/town.tscn")
 var map_plan = []
 var map_nodes = []
-var map_size = 100
+var map_size = 24
 var towns = []
 
 # Called when the node enters the scene tree for the first time.

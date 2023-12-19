@@ -45,10 +45,10 @@ func evaluate_visible_roads():
 #endregion state
 
 func _on_click():
-	if (is_buildable() and GameData.cursor_state == GameData.CursorState.BUILDING):
+	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		GameData.build_road(map_x, map_y)
-	elif (is_traversible() and GameData.cursor_state == GameData.CursorState.SELECTING_TRAIN_DESTINATION):
-		TrainService.set_train_destination(self)
+	elif (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
+		CursorService.set_train_destination(self)
 		
 func add_path_child(key, node):
 	return paths.add_path_child(key, node)
@@ -58,7 +58,7 @@ func remove_path_child(key):
 
 func _on_hover():
 	#print("hover ", map_x, ", ", map_y)
-	if (is_buildable() and GameData.cursor_state == GameData.CursorState.BUILDING):
+	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		# TODO Show price
 		flat_mesh.set_surface_override_material(0, hover_material)
 

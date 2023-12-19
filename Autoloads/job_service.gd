@@ -3,6 +3,7 @@ extends Node
 var _job_list = []
 var visible_job_list = []
 var job_menu
+var money = 200
 @onready var job_menu_ref = preload("res://Menus/Job List/Job List.tscn")
 
 
@@ -15,7 +16,7 @@ func _generate_job_list():
 					"cargo": cargo_type,
 					"payment": _calculate_payment(town, cargo_type)
 				})
-	_job_list.shuffle()
+	_job_list = Util.shuffle(_job_list)
 
 func _calculate_payment(town: TownNode, cargo_type):
 	var shortest_distance = GameData.map_size * 2 + 1
@@ -45,6 +46,12 @@ func connect_job_list_scene(parent):
 
 func get_jobs_by_town(town):
 	return visible_job_list.filter(func(job): return job.town == town)
+	
+func complete_job(job):
+	money += job.payment
+	visible_job_list.erase(job)
+	visible_job_list.append(_job_list.pop_front())
+	job_menu.set_jobs(visible_job_list)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

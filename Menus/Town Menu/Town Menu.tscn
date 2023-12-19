@@ -54,6 +54,9 @@ text = "Welcome to Town
 "
 fit_content = true
 
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
 [node name="Close" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 3

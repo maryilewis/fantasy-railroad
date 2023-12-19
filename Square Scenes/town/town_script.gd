@@ -1,16 +1,8 @@
 class_name TownNode extends SquareBaseNode
 
 var display_name ="Cool Town Name"
-var trains_in_station = []
 var products = [] # array of type CargoType value
 var jobs = [] # array of jobs
-
-# TODO this will need to change for multiplayer
-func train_arrives(train):
-	trains_in_station.append(train)
-	
-func train_departs(train):
-	trains_in_station.erase(train)
 
 func zoom_to_town():
 	print("zoom to ", display_name)
@@ -36,7 +28,7 @@ func _random_town_name():
 	return starts[randi() % starts.size()] + ends[randi() % ends.size()]
 
 func _on_click():
-	if GameData.cursor_state != GameData.CursorState.SELECTING_TRAIN_DESTINATION:
+	if CursorService.cursor_state != CursorService.CursorState.SELECTING_TRAIN_DESTINATION:
 		MenuService.show_town_menu(self)
 	else:
 		super()
