@@ -48,7 +48,7 @@ func _on_click():
 	if (is_buildable() and GameData.cursor_state == GameData.CursorState.BUILDING):
 		GameData.build_road(map_x, map_y)
 	elif (is_traversible() and GameData.cursor_state == GameData.CursorState.SELECTING_TRAIN_DESTINATION):
-		GameData.set_train_destination(self)
+		TrainService.set_train_destination(self)
 		
 func add_path_child(key, node):
 	return paths.add_path_child(key, node)

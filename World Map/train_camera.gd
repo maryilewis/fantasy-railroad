@@ -5,7 +5,7 @@ var _follow_ref: Node3D
 
 func _ready():
 	GameData.train_camera = self
-	set_follow_ref(GameData.target_train)
+	set_follow_ref(TrainService.target_train)
 
 # Updates mouselook and movement every frame
 func _process(_delta):

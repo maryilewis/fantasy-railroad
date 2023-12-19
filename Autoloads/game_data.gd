@@ -16,42 +16,18 @@ var cursor_state: CursorState = CursorState.FREE
 # escape and maybe right click should trigger this
 func free_cursor():
 	cursor_state = CursorState.FREE
-	for train in trains:
+	for train in TrainService.trains:
 		train.enable_click()
 	
 func set_selecting_train_destination():
 	cursor_state = CursorState.SELECTING_TRAIN_DESTINATION
-	for train in trains:
+	for train in TrainService.trains:
 		train.enable_click()
 	
 func set_building():
 	cursor_state = CursorState.BUILDING
-	for train in trains:
+	for train in TrainService.trains:
 		train.disable_click()
-#endregion
-
-#region direct trains
-@onready var train_ref = preload("res://Vehicles/train.tscn")
-var target_train: Train
-var trains = []
-
-func init_trains():
-	var first_train = train_ref.instantiate()
-	trains.append(first_train)
-	for train in trains:
-		add_child(train)
-		print("train", train)
-		target_train = train.get_engine()
-		print("engine", train)
-
-func set_target_train(node):
-	target_train = node
-
-func set_train_destination(node):
-	if (cursor_state == CursorState.SELECTING_TRAIN_DESTINATION):
-		cursor_state = CursorState.FREE
-		target_train.set_destination(node.map_x, node.map_y)
-
 #endregion
 
 #region map
@@ -73,8 +49,7 @@ func _ready():
 	init_map_data2(map_size)
 	print("creating map...")
 	create_map()
-	print("placing trains...")
-	init_trains()
+
 
 func init_map_data2(size):
 	for i in size:

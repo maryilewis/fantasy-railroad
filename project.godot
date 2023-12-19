@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://Autoloads/game_data.gd"
 MenuService="*res://Autoloads/menu_service.gd"
 JobService="*res://Autoloads/job_service.gd"
+TrainService="*res://Autoloads/train_service.gd"
 
 [debug]
 
