@@ -36,5 +36,8 @@ func _random_town_name():
 	return starts[randi() % starts.size()] + ends[randi() % ends.size()]
 
 func _on_click():
-	MenuService.show_town_menu(self)
+	if GameData.cursor_state != GameData.CursorState.SELECTING_TRAIN_DESTINATION:
+		MenuService.show_town_menu(self)
+	else:
+		super()
 
