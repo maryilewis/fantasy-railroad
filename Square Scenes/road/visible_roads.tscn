@@ -1,13 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bksinyq3m8tkn"]
+[gd_scene load_steps=8 format=3 uid="uid://bksinyq3m8tkn"]
 
 [ext_resource type="Script" path="res://Square Scenes/road/visible_roads.gd" id="1_rwffn"]
 [ext_resource type="Material" uid="uid://4tjna4v7bu7u" path="res://Square Scenes/road/visible_roads.tres" id="2_01ims"]
+[ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="3_tsr7u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8232e"]
 material = ExtResource("2_01ims")
 
 [sub_resource type="BoxMesh" id="BoxMesh_58wxn"]
 material = ExtResource("2_01ims")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jj3cv"]
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.3
+initial_velocity_max = 0.7
+scale_min = 0.5
+scale_max = 1.5
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+turbulence_noise_scale = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_fnt63"]
+material = ExtResource("3_tsr7u")
+radius = 0.01
+height = 0.02
 
 [node name="Visible Roads" type="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.02, 0)
@@ -36,3 +54,8 @@ skeleton = NodePath("../../Paths")
 [node name="Pole" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("BoxMesh_58wxn")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525513, 0)
+process_material = SubResource("ParticleProcessMaterial_jj3cv")
+draw_pass_1 = SubResource("SphereMesh_fnt63")

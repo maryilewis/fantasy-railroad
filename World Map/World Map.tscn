@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds25bg34pn02h"]
+[gd_scene load_steps=6 format=3 uid="uid://ds25bg34pn02h"]
 
 [ext_resource type="Script" path="res://World Map/world_map.gd" id="1_5q762"]
 [ext_resource type="Script" path="res://World Map/world_camera.gd" id="2_mbkis"]
 [ext_resource type="AudioStream" uid="uid://ct4w3wmspd04h" path="res://Assets/Music/Train Song Current Good One.wav" id="4_85n76"]
 [ext_resource type="PackedScene" uid="uid://cdl5y03o54drt" path="res://World Map/underground.tscn" id="4_hp1to"]
+
+[sub_resource type="Environment" id="Environment_5u35n"]
+glow_enabled = true
 
 [node name="World Map" type="Node3D"]
 script = ExtResource("1_5q762")
@@ -28,3 +31,6 @@ script = ExtResource("2_mbkis")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_85n76")
 autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5u35n")
