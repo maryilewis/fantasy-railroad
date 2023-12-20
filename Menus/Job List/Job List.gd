@@ -5,14 +5,16 @@ func set_jobs(jobs):
 		$ScrollContainer/VBoxContainer.remove_child(j)
 		j.queue_free()
 	for job in jobs:
+		var hbc = HBoxContainer.new()
+		$ScrollContainer/VBoxContainer.add_child(hbc)
 		var label = Label.new()
-		label.text = "Bring " + job.cargo + " to " + job.town.display_name
-		$ScrollContainer/VBoxContainer.add_child(label)
+		label.text = "Bring " + job.cargo + " to "
+		hbc.add_child(label)
 		var link = LinkButton.new()
 		link.text = job.town.display_name
 		# change to calling the camera and sending the town in "bind"
 		link.pressed.connect(job.town.zoom_to_town.bind())
-		$ScrollContainer/VBoxContainer.add_child(link)
+		hbc.add_child(link)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

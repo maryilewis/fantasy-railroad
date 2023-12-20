@@ -3,7 +3,7 @@ class_name Train extends Node3D
 # TODO if at destination, stop at 50% progress
 # TODO if starting from stop, start at 50% progress
 
-var destination_position: Vector2
+var destination: SquareBaseNode
 var location: Vector2
 var train_path = []
 var train_instance
@@ -33,12 +33,13 @@ func _create_test_train_path():
 
 
 func set_destination(x, y):
-	train_path = [GameData.map_nodes[x][y]]
+	destination = GameData.map_nodes[x][y]
+	train_path = [destination]
 	train_path = find_shortest_path(current_road, [x, y])
 	arrived = false
 
 
-func find_shortest_path(start_node, destination):
+func find_shortest_path(start_node, destination_coords):
 	var visited_nodes = []
 	var queue = []
 	# push the first path into the queue
@@ -50,7 +51,7 @@ func find_shortest_path(start_node, destination):
 		# get the last node from the path
 		var node = path[-1]
 		# path found
-		if [node.map_x, node.map_y] == destination:
+		if [node.map_x, node.map_y] == destination_coords:
 			return path
 		# enumerate all adjacent nodes, construct a 
 		# new path and push it into the queue
@@ -147,6 +148,8 @@ func _process(_delta):
 	if (train_path.size() == 0):
 		if !arrived:
 			arrived = true;
+			if (destination != null):
+				destination._on_click()
 
 	elif (train_progress != null and train_progress.progress_ratio >= .99):
 		train_path.remove_at(0)

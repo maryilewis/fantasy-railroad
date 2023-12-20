@@ -1,3 +1,13 @@
-[gd_resource type="Theme" format=3 uid="uid://da3vu24tysrq3"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://da3vu24tysrq3"]
+
+[ext_resource type="FontFile" uid="uid://bwf5ihy2mlw2n" path="res://Assets/Fonts/Nunito/Nunito-Regular.ttf" id="1_0ku7b"]
+[ext_resource type="StyleBox" uid="uid://ch7s37fkt3vrj" path="res://Themes/boxes/panel_box.tres" id="1_oilly"]
 
 [resource]
+default_font = ExtResource("1_0ku7b")
+default_font_size = 18
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+Panel/styles/panel = ExtResource("1_oilly")

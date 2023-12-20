@@ -20,7 +20,7 @@ var _zoom = 0
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		_mouse_position = event.relative
+		_mouse_position = event.position
 
 	# Receives mouse button input
 	if event is InputEventMouseButton:
@@ -31,7 +31,6 @@ func _input(event):
 				_zoom = 1
 			MOUSE_BUTTON_MIDDLE:
 				if event.pressed:
-					print("hey")
 					_following = false
 					_click_moving = true
 					_click_mouse_position = _mouse_position
@@ -72,13 +71,25 @@ func _process(_delta):
 		_update_follow_movement()
 	_update_zoom()
 
+# .1155 -> 5850
+# 7   	->	96	.0104	.148
+# 9.92	->	68	.0147	.147
+# 15  	->	44	.0227	.153
+# 20.75	->	30	.0333	.160
+
+
 func _follow_mouse():
-	var mouse_change = (_mouse_position - _click_mouse_position) / 30
+	var mouse_change = (_mouse_position - _click_mouse_position) * size * .00148 #don't ask where the number came from
+	#if (not mouse_change.is_zero_approx()):
+	#	print("not 0!")
 	translate(Vector3(-mouse_change.x, mouse_change.y, 0))
+	_click_mouse_position = _mouse_position
 
 func _update_zoom():
-	size += _zoom * size / 25
-	_zoom = 0
+	if (_zoom != 0):
+		print("size", size)
+		size += _zoom * size / 25
+		_zoom = 0
 
 # Updates camera movement
 func _update_movement():

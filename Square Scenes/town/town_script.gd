@@ -6,6 +6,7 @@ var jobs = [] # array of jobs
 
 func zoom_to_town():
 	print("zoom to ", display_name)
+	GameData.world_camera.set_follow_ref(self)
 
 func _ready():
 	build_road()
