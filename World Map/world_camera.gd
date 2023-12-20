@@ -71,6 +71,7 @@ func _process(_delta):
 		_update_follow_movement()
 	_update_zoom()
 
+# figuring out camera speed at different sizes
 # .1155 -> 5850
 # 7   	->	96	.0104	.148
 # 9.92	->	68	.0147	.147
@@ -87,7 +88,6 @@ func _follow_mouse():
 
 func _update_zoom():
 	if (_zoom != 0):
-		print("size", size)
 		size += _zoom * size / 25
 		_zoom = 0
 

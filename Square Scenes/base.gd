@@ -7,7 +7,8 @@ var path_scene = preload("res://Square Scenes/road/paths.tscn")
 var visible_road_scene = preload("res://Square Scenes/road/visible_roads.tscn")
 var map_x: int
 var map_y: int
-var road_cost = 10
+var road_cost = 4
+var holding_mouse_click = false
 #endregion
 
 #region traversal info
@@ -46,12 +47,15 @@ func evaluate_visible_roads():
 #endregion state
 
 func _on_click():
+	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
+		CursorService.set_train_destination(self)
+
+func check_and_build_road():
+	# TODO: road previews instead of actual roads
 	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		GameData.build_road(map_x, map_y)
 		JobService.pay_for_road(road_cost)
-	elif (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
-		CursorService.set_train_destination(self)
-		
+
 func add_path_child(key, node):
 	return paths.add_path_child(key, node)
 	
@@ -61,6 +65,8 @@ func remove_path_child(key):
 func _on_hover():
 	#print("hover ", map_x, ", ", map_y)
 	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
+		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
+			check_and_build_road()
 		# TODO Show price
 		flat_mesh.set_surface_override_material(0, hover_material)
 
@@ -74,5 +80,7 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			if (event.button_index == MOUSE_BUTTON_LEFT):
 				if (event.is_released()):
 					_on_click()
+					# TODO: actually build the previewed roads
+				else:
+					check_and_build_road()
 
-	
