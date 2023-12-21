@@ -1,7 +1,11 @@
 class_name TownMenu extends Control
+## What town produces, what active jobs they have
+## and TODO set as destination (if you aren't there already)
 
 var town: TownNode
 var jobs = []
+
+@onready var list_container = get_node("Panel/MarginContainer/VBoxContainer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,27 +13,27 @@ func _ready():
 
 func set_town(_town):
 	#remove all old buttons!!
-	for child in $Panel/VBoxContainer.get_children():
+	for child in list_container.get_children():
 		if child.is_class("Button"):
-			$Panel/VBoxContainer.remove_child(child)
+			list_container.remove_child(child)
 			child.queue_free()
 	
 	town = _town
-	$Panel/VBoxContainer/RichTextLabel.text = "Welcome to " + town.display_name
+	$Panel/MarginContainer/VBoxContainer/RichTextLabel.text = "Welcome to " + town.display_name
 	#add new butons
 	jobs = JobService.get_jobs_by_town(town)
 	for job in jobs:
 		var button = Button.new()
 		button.text = "Deliver " + job.cargo + " " + str(job.payment)
 		button.pressed.connect(complete_job.bind(job))
-		$Panel/VBoxContainer.add_child(button)
+		list_container.add_child(button)
 		button.set_meta("type", "job")
 		button.set_meta("job", job)
 	for product in town.products:
 		var button = Button.new()
 		button.text = "Pick up " + product
 		button.pressed.connect(pick_up_cargo.bind(product))
-		$Panel/VBoxContainer.add_child(button)
+		list_container.add_child(button)
 		button.set_meta("type", "cargo")
 		button.set_meta("cargo", product)
 	evaluate_buttonability()
@@ -37,7 +41,7 @@ func set_town(_town):
 func evaluate_buttonability():
 	var train_is_here = TrainService.is_train_at_node(town)
 	var the_train = TrainService.train
-	for child in $Panel/VBoxContainer.get_children():
+	for child in list_container.get_children():
 		if child.is_class("Button"):
 			match child.get_meta("type"):
 				"job":

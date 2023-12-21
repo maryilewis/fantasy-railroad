@@ -1,25 +1,31 @@
 class_name JobList extends Control
 
-func set_jobs(jobs):
-	for j in $ScrollContainer/VBoxContainer.get_children():
-		$ScrollContainer/VBoxContainer.remove_child(j)
+@onready var list_container = get_node("ScrollContainer/MarginContainer/VBoxContainer")
+
+var jobs
+
+func set_jobs(_jobs):
+	jobs = _jobs
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	populate_job_list()
+
+func populate_job_list():
+	for j in list_container.get_children():
+		list_container.remove_child(j)
 		j.queue_free()
 	for job in jobs:
 		var hbc = HBoxContainer.new()
-		$ScrollContainer/VBoxContainer.add_child(hbc)
+		list_container.add_child(hbc)
 		var label = Label.new()
-		label.text = "Bring " + job.cargo + " to "
+		label.text = "$" + str(job.payment) + ": " + job.cargo + " to "
 		hbc.add_child(label)
 		var link = LinkButton.new()
 		link.text = job.town.display_name
 		# change to calling the camera and sending the town in "bind"
 		link.pressed.connect(job.town.zoom_to_town.bind())
 		hbc.add_child(link)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

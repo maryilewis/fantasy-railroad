@@ -1,4 +1,5 @@
 extends Node
+## List of jobs in the word
 
 var _job_list = []
 var visible_job_list = []

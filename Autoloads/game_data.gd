@@ -1,4 +1,7 @@
 extends Node
+## Create and change world map grid
+
+# TODO rename to map service, make a new script for save/load data
 
 #region camera
 var world_camera: MaryWorldCamera
@@ -6,6 +9,7 @@ var train_camera: TrainCamera
 #endregion
 
 #region rng
+# TODO move to util
 var rng = RandomNumberGenerator.new()
 #endregion
 

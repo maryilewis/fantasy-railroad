@@ -1,7 +1,5 @@
 extends Node
-
-# when a train is in a town and the town is clicked, open the town menu with details from that town
-# when town menu is closed, hide it
+## updates Details menu and Town Menu. Need to rethink how these all talk.
 
 @onready var town_menu_ref = preload("res://Menus/Town Menu/Town Menu.tscn")
 @onready var details_menu_ref = preload("res://Menus/Details/details menu.tscn")
@@ -34,6 +32,7 @@ func update_money(money):
 	details_menu.update_money(money)
 func add_job_menu(job_menu):
 	details_menu.add_job_menu(job_menu)
+#endregion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

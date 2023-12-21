@@ -15,7 +15,6 @@ var holding_mouse_click = false
 var path_progress = 0
 var speed = .05
 var path_refs = {}
-var visible_roads_ref
 var paths
 var visible_roads
 #endregion

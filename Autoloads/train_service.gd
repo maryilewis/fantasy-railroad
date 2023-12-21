@@ -17,14 +17,15 @@ func set_target_train(node):
 
 func set_target_train_destination(node):
 	target_train.set_destination(node.map_x, node.map_y)
-
 #endregion
 
+#region click behind train
 func disable_train_click():
 	train.disable_click()
 	
 func enable_train_click():
 	train.enable_click()
+#endregion
 
 func is_train_at_node(node: SquareBaseNode):
 	return train.get_engine().current_road == node

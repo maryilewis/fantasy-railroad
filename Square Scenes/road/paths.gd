@@ -1,4 +1,5 @@
 class_name PathNode extends Node3D
+## Paths for vehicles to remotely follow
 
 var path_progress = 0
 var speed = .01

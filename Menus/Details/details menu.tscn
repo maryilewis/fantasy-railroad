@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Menus/Details/details menu.gd" id="1_4pmgl"]
 [ext_resource type="Theme" uid="uid://da3vu24tysrq3" path="res://Menus/Themes/details_theme.tres" id="1_fkumv"]
-[ext_resource type="Script" path="res://World Map/train_camera.gd" id="2_8sijn"]
+[ext_resource type="Script" path="res://World Map/train_camera.gd" id="3_ajdt1"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -63,7 +63,7 @@ transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0
 projection = 1
 size = 2.0
 far = 200.0
-script = ExtResource("2_8sijn")
+script = ExtResource("3_ajdt1")
 
 [node name="Cargo Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
 layout_mode = 2
@@ -80,7 +80,6 @@ theme = ExtResource("1_fkumv")
 text = "Build Roads"
 
 [node name="Jobs" type="Panel" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("1_fkumv")
 
