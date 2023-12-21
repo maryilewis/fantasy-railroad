@@ -36,7 +36,16 @@ func set_town(_town):
 		list_container.add_child(button)
 		button.set_meta("type", "cargo")
 		button.set_meta("cargo", product)
+	var button = Button.new()
+	button.text = "Set Destination"
+	button.set_meta("type", "destination")
+	button.pressed.connect(set_destination)
+	list_container.add_child(button)
 	evaluate_buttonability()
+
+func set_destination():
+	TrainService.set_target_train_destination(town)
+	MenuService.close_town_menu()
 
 func evaluate_buttonability():
 	var train_is_here = TrainService.is_train_at_node(town)
@@ -55,6 +64,12 @@ func evaluate_buttonability():
 						(child as Button).disabled = false
 					else:
 						(child as Button).disabled = true
+				"destination":
+					if (TrainService.is_train_at_node(town)):
+						# TODO check for path
+						(child as Button).disabled = true
+					else:
+						(child as Button).disabled = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
