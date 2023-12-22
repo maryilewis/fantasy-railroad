@@ -17,6 +17,7 @@ var rng = RandomNumberGenerator.new()
 signal map_updated
 
 @onready var flat = preload("res://Square Scenes/flat/flat.tscn")
+@onready var wheat = preload("res://Square Scenes/wheat/wheat.tscn")
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water/water.tscn")
 @onready var town = preload("res://Square Scenes/town/town.tscn")
@@ -56,6 +57,8 @@ func init_map_data2(size):
 				map_plan[i].append('f')
 			elif (dice_roll >= 75):
 				map_plan[i].append('t')
+			elif (dice_roll >= 70):
+				map_plan[i].append('wh')
 			else:
 				map_plan[i].append('.')
 	map_plan[size/2][size/2] = 't'
@@ -89,6 +92,8 @@ func create_map():
 				't':
 					new_square = town.instantiate()
 					towns.append(new_square)
+				'wh':
+					new_square = wheat.instantiate()
 			new_square.position = Vector3(i - size/2, 0, j - size/2)
 			new_square.map_x = i
 			new_square.map_y = j
