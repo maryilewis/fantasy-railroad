@@ -7,7 +7,6 @@
 
 [sub_resource type="Environment" id="Environment_5u35n"]
 glow_enabled = true
-glow_blend_mode = 0
 
 [node name="World Map" type="Node3D"]
 script = ExtResource("1_5q762")
