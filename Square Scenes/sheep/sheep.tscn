@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw2j2656ywxrn"]
+
+[ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_h8nn5"]
+[ext_resource type="Script" path="res://Square Scenes/sheep/sheep.gd" id="2_nette"]
+[ext_resource type="Material" uid="uid://b8wvcslsika8o" path="res://Square Scenes/materials/sheep.tres" id="3_qd1a8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cvuht"]
+material = ExtResource("3_qd1a8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1npn"]
+albedo_color = Color(0.407843, 0.368627, 0.360784, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qxxf4"]
+material = SubResource("StandardMaterial3D_a1npn")
+
+[node name="Sheep" instance=ExtResource("1_h8nn5")]
+script = ExtResource("2_nette")
+
+[node name="Sheep" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-2.13573e-09, -0.0635176, -0.0106174, 0.05, -2.84124e-09, 0, -4.64102e-10, -0.0138026, 0.0488597, 0.335371, 0.519845, -0.301198)
+mesh = SubResource("SphereMesh_cvuht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sheep" index="0"]
+transform = Transform3D(0.5, -1.42109e-14, 0, 1.77636e-14, 0.5, 0, 0, 0, 0.5, 0.345086, 0.535446, 0)
+mesh = SubResource("SphereMesh_qxxf4")
+
+[node name="Sheep2" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(-2.08392e-09, -0.0619769, 0.0150711, 0.05, -2.84124e-09, 0, 6.58778e-10, 0.0195924, 0.0476746, 0.204454, 0.519845, -0.301198)
+mesh = SubResource("SphereMesh_cvuht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sheep2" index="0"]
+transform = Transform3D(0.5, -1.42109e-14, 0, 1.77636e-14, 0.5, 0, 0, 0, 0.5, 0.345086, 0.535446, 0)
+mesh = SubResource("SphereMesh_qxxf4")
+
+[node name="Sheep3" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(-2.06201e-09, -0.0613253, -0.0165735, 0.05, -2.84124e-09, 0, -7.2445e-10, -0.0215455, 0.0471733, 0.303541, 0.519845, -0.131636)
+mesh = SubResource("SphereMesh_cvuht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sheep3" index="0"]
+transform = Transform3D(0.5, -1.42109e-14, 0, 1.77636e-14, 0.5, 0, 0, 0, 0.5, 0.345086, 0.535446, 0)
+mesh = SubResource("SphereMesh_qxxf4")
