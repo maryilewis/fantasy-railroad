@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o8hy3k2h23co"]
+
+[ext_resource type="PackedScene" uid="uid://cclu25d1g4oex" path="res://Square Scenes/incline_base/incline base.tscn" id="1_8yvnt"]
+
+[node name="incline" instance=ExtResource("1_8yvnt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

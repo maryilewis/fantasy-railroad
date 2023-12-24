@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cclu25d1g4oex"]
+
+[ext_resource type="Script" path="res://Square Scenes/incline_base/incline base.gd" id="1_ml4yx"]
+[ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="2_cikdn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rpnde"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v7itn"]
+material = ExtResource("2_cikdn")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jx7wg"]
+material = ExtResource("2_cikdn")
+
+[node name="incline base" type="Node3D"]
+script = ExtResource("1_ml4yx")
+
+[node name="Flat" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat"]
+shape = SubResource("BoxShape3D_rpnde")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
+mesh = SubResource("BoxMesh_v7itn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
+transform = Transform3D(0.499697, -0.25, 0, 0.2885, 0.433013, 0, 0, 0, 0.5, 0, 0.79, 0)
+mesh = SubResource("PlaneMesh_jx7wg")

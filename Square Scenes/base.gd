@@ -62,7 +62,7 @@ func remove_path_child(key):
 	return paths.remove_path_child(key)
 
 func _on_hover():
-	#print("hover ", map_x, ", ", map_y)
+	print("hover ", map_x, ", ", map_y)
 	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
 			check_and_build_road()

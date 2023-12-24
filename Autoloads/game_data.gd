@@ -21,10 +21,14 @@ signal map_updated
 @onready var forest = preload("res://Square Scenes/forest/forest.tscn")
 @onready var water = preload("res://Square Scenes/water/water.tscn")
 @onready var town = preload("res://Square Scenes/town/town.tscn")
+@onready var incline = preload("res://Square Scenes/incline/incline.tscn")
+
 var map_plan = []
 var map_nodes = []
-var map_size = 24
+var map_size = 100
 var towns = []
+
+const ELEVATION_MULTIPLIER = .58
 
 enum SquareType {
 	FLAT = 1,
@@ -32,23 +36,19 @@ enum SquareType {
 	WATER = 3,
 	FOREST = 4,
 	WHEAT = 5,
-	SHEEP = 6
+	SHEEP = 6,
+	INCLINE = 7
 }
 
-class SquareDetails:
-	var display_name: String
-	var square_type: SquareType
-	
-	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("planning map...")
 	rng.seed = 12
 	init_map_data2(map_size)
+	add_inclines()
 	print("creating map...")
 	create_map()
-
 
 func init_map_data2(size):
 	for i in size:
@@ -56,7 +56,6 @@ func init_map_data2(size):
 	for i in size:
 		for j in size:
 			var dice_roll = rng.randi_range(1, 100)
-			print("i: ", i, ", j: ", j, ", roll: ", dice_roll)
 			var node_above
 			var node_left
 			if (j > 0):
@@ -98,15 +97,24 @@ func init_map_data2(size):
 	map_plan[size/2][size/2] = {
 		"key": SquareType.TOWN
 	}
+	
+func add_inclines():
+	for i in range (54,59):
+		GameData.map_plan[i][55] = {
+			"key": SquareType.INCLINE
+		}
+		GameData.map_plan[i][54].elevation = 1
+		GameData.map_plan[i][53].elevation = 1
+
 
 func create_map():
 	var size = GameData.map_plan.size()
 	for i in range(size):
 		GameData.map_nodes.append([])
-		for j in range(size): #assumes a square
-			var key = GameData.map_plan[i][j].key
+		for j in range(size): #assumes a square world
+			var node_def = GameData.map_plan[i][j]
 			var new_square
-			match key:
+			match node_def.key:
 				SquareType.FLAT:
 					new_square = flat.instantiate()
 				SquareType.WATER:
@@ -120,14 +128,21 @@ func create_map():
 					new_square = wheat.instantiate()
 				SquareType.SHEEP:
 					new_square = sheep.instantiate()
-			new_square.position = Vector3(i - size/2, 0, j - size/2)
+				SquareType.INCLINE:
+					new_square = incline.instantiate()
+			var y
+			if node_def.has("elevation"):
+				y = node_def.elevation * ELEVATION_MULTIPLIER
+			else:
+				y = 0
+			new_square.position = Vector3(i - size/2, y, j - size/2)
 			new_square.map_x = i
 			new_square.map_y = j
 			connect("map_updated", new_square.evaluate_visible_roads)
 			GameData.map_nodes[i].append(new_square)
 			add_child(new_square)
 	# send signal that map is initialized
-	emit_signal("map_updated")
+	emit_signal("map_updated") # TODO evaluate inclines in this manner as well
 
 #endregion
 

@@ -18,7 +18,7 @@ var my_camera: MaryWorldCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(12,12)
+	place_train(50,50)
 	#set_destination(46,51)
 	pass
 
