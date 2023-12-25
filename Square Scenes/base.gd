@@ -7,6 +7,7 @@ var path_scene = preload("res://Square Scenes/road/paths.tscn")
 var visible_road_scene = preload("res://Square Scenes/road/visible_roads.tscn")
 var map_x: int
 var map_y: int
+var map_elevation = 0
 var road_cost = 4
 var holding_mouse_click = false
 #endregion
@@ -75,11 +76,12 @@ func _on_unhover():
 
 # todo click and drag to build
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
-		if event is InputEventMouseButton:
-			if (event.button_index == MOUSE_BUTTON_LEFT):
-				if (event.is_released()):
-					_on_click()
-					# TODO: actually build the previewed roads
-				else:
-					check_and_build_road()
+	print("input")
+	if event is InputEventMouseButton:
+		if (event.button_index == MOUSE_BUTTON_LEFT):
+			if (event.is_released()):
+				_on_click()
+				# TODO: actually build the previewed roads
+			else:
+				check_and_build_road()
 
