@@ -5,4 +5,5 @@ transparency = 1
 albedo_color = Color(0.45098, 0.960784, 0.901961, 0.501961)
 roughness = 0.0
 clearcoat_enabled = true
+anisotropy = -0.76
 subsurf_scatter_strength = 0.17

@@ -1,5 +1,7 @@
 class_name SquareBaseNode extends Node3D
 
+var discovered = true
+
 #region build info
 @onready var flat_mesh = get_node("Flat/CollisionShape3D/MeshInstance3D")
 var hover_material = preload("res://Square Scenes/materials/light.tres")
@@ -46,6 +48,20 @@ func evaluate_visible_roads():
 		visible_roads.evaluate_visible_roads(true)
 #endregion state
 
+# custom initialize function
+func initialize(_map_x, _map_y, _position, _discovered):
+	map_x = _map_x
+	map_y = _map_y
+	position = _position
+	discovered = _discovered
+	if !discovered:
+		self.visible = false
+
+func discover():
+	if (!discovered):
+		discovered = true
+		visible = true
+
 func _on_click():
 	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
 		CursorService.set_train_destination(self)
@@ -63,7 +79,7 @@ func remove_path_child(key):
 	return paths.remove_path_child(key)
 
 func _on_hover():
-	print("hover ", map_x, ", ", map_y)
+	MenuService.update_location(map_x, map_y)
 	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
 		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
 			check_and_build_road()
@@ -76,7 +92,6 @@ func _on_unhover():
 
 # todo click and drag to build
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
-	print("input")
 	if event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT):
 			if (event.is_released()):

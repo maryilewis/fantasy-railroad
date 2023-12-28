@@ -25,7 +25,8 @@ signal map_updated
 
 var map_plan = []
 var map_nodes = []
-var map_size = 100
+const map_size = 100
+const discovery_distance = 10
 var towns = []
 
 const ELEVATION_MULTIPLIER = .58
@@ -51,6 +52,7 @@ func _ready():
 	create_map()
 
 func init_map_data2(size):
+	var train_start = size/2
 	for i in size:
 		map_plan.append([])
 	for i in size:
@@ -70,7 +72,7 @@ func init_map_data2(size):
 				map_plan[i].append({
 					"key": SquareType.FOREST
 				})
-			elif (dice_roll >= 90):
+			elif (dice_roll >= 93):
 				map_plan[i].append({
 					"key": SquareType.WATER
 				})
@@ -94,7 +96,7 @@ func init_map_data2(size):
 				map_plan[i].append({
 					"key": SquareType.FLAT
 				})
-	map_plan[size/2][size/2] = {
+	map_plan[train_start][train_start] = {
 		"key": SquareType.TOWN
 	}
 	
@@ -109,9 +111,11 @@ func add_inclines():
 
 func create_map():
 	var size = GameData.map_plan.size()
+	var train_start = size/2
 	for i in range(size):
 		GameData.map_nodes.append([])
 		for j in range(size): #assumes a square world
+			var discovered = true
 			var node_def = GameData.map_plan[i][j]
 			var new_square
 			match node_def.key:
@@ -130,14 +134,14 @@ func create_map():
 					new_square = sheep.instantiate()
 				SquareType.INCLINE:
 					new_square = incline.instantiate()
+			if pow(pow(train_start-i, 2) + pow (train_start-j, 2), .5) > discovery_distance:
+				discovered = false
 			var y
 			if node_def.has("elevation"):
 				y = node_def.elevation * ELEVATION_MULTIPLIER
 			else:
 				y = 0
-			new_square.position = Vector3(i - size/2, y, j - size/2)
-			new_square.map_x = i
-			new_square.map_y = j
+			new_square.initialize(i, j, Vector3(i - size/2, y, j - size/2), discovered)
 			connect("map_updated", new_square.evaluate_visible_roads)
 			GameData.map_nodes[i].append(new_square)
 			add_child(new_square)
@@ -158,6 +162,12 @@ func get_traversible_neighbors(x, y):
 			and GameData.map_nodes[map_x][map_y].is_traversible()):
 				neighbors.append(GameData.map_nodes[map_x][map_y])
 	return neighbors
+
+func discover_map(x, y):
+	for i in range(x - discovery_distance, x + discovery_distance):
+		for j in range(y - discovery_distance, y + discovery_distance):
+			if pow(pow(x-i, 2) + pow (y-j, 2), .5) <= discovery_distance:
+				map_nodes[i][j].discover()
 
 #region building
 func build_road(x, y):

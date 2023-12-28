@@ -18,9 +18,7 @@ var my_camera: MaryWorldCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_train(50,50)
-	#set_destination(46,51)
-	pass
+	place_train(GameData.map_size/2,GameData.map_size/2)
 
 
 func _create_test_train_path():
@@ -102,6 +100,7 @@ func move_train_along():
 	current_road = train_path[0]
 	curr_x = current_road.map_x
 	curr_y = current_road.map_y
+	GameData.discover_map(curr_x, curr_y)
 	if (train_path.size() > 1):
 		next_x = train_path[1].map_x
 		next_y = train_path[1].map_y
@@ -145,13 +144,13 @@ func _get_opposite(dir):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	var max_progress = .99
 	if (train_path.size() == 0):
 		if !arrived:
 			arrived = true;
 			if (destination != null):
 				destination._on_click()
-
-	elif (train_progress != null and train_progress.progress_ratio >= .99):
+	elif (train_progress != null and train_progress.progress_ratio >= max_progress):
 		train_path.remove_at(0)
 		if (train_path.size() > 0):
 			move_train_along()

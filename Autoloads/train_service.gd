@@ -8,9 +8,7 @@ var train: TrainParent
 func init_trains():
 	train = train_ref.instantiate()
 	add_child(train)
-	print("train", train)
 	target_train = train.get_engine()
-	print("engine", train)
 
 func set_target_train(node):
 	target_train = node
