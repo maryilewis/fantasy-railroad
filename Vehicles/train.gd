@@ -6,7 +6,6 @@ class_name Train extends Node3D
 var destination: SquareBaseNode
 var location: Vector2
 var train_path = []
-var train_instance
 var train_progress: PathFollow3D
 var current_road: SquareBaseNode
 var current_road_path_key

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcr7brclqtj7r"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d8naw"]
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, -0.3, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjwt5"]
+transparency = 1
+albedo_color = Color(0.803922, 0.803922, 0.803922, 0.45098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_en5lh"]
+material = SubResource("StandardMaterial3D_tjwt5")
+radius = 0.05
+height = 0.1
+
+[node name="Square Appears Effect" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.01308, 0)
+transparency = 0.51
+visibility_range_fade_mode = 2
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_d8naw")
+draw_pass_1 = SubResource("SphereMesh_en5lh")

@@ -8,10 +8,6 @@ var world_camera: MaryWorldCamera
 var train_camera: TrainCamera
 #endregion
 
-#region rng
-var rng = RandomNumberGenerator.new() # TODO move to util
-#endregion
-
 #region map
 signal map_updated
 
@@ -45,7 +41,7 @@ enum SquareType {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("planning map...")
-	rng.seed = 12
+	Util.rng.seed = 12
 	init_map_data2(map_size)
 	add_inclines()
 	print("creating map...")
@@ -57,7 +53,7 @@ func init_map_data2(size):
 		map_plan.append([])
 	for i in size:
 		for j in size:
-			var dice_roll = rng.randi_range(1, 100)
+			var dice_roll = Util.rng.randi_range(1, 100)
 			var node_above
 			var node_left
 			if (j > 0):
