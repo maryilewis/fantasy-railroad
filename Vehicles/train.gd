@@ -33,7 +33,6 @@ func set_destination(x, y):
 	destination = GameData.map_nodes[x][y]
 	train_path = [destination]
 	train_path = find_shortest_path(current_road, [x, y])
-	arrived = false
 
 
 func find_shortest_path(start_node, destination_coords):
@@ -83,7 +82,7 @@ func place_train(x, y):
 	train_progress = current_road.add_path_child(current_road_path_key, self)
 	train_progress.progress_ratio = .5
 
-func move_train_along():
+func move_train_along(head_start = false):
 	var prev_x
 	var prev_y
 	var next_x
@@ -128,6 +127,9 @@ func move_train_along():
 		entry_point = _get_opposite(exit_point)
 	current_road_path_key = entry_point + exit_point
 	train_progress = current_road.add_path_child(current_road_path_key, self)
+	if head_start:
+		print("head start yes")
+		train_progress.progress_ratio = .5
 
 
 func _get_opposite(dir):
@@ -144,12 +146,19 @@ func _get_opposite(dir):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var max_progress = .99
-	if (train_path.size() == 0):
+	if (train_path.size() == 1):
 		if !arrived:
 			arrived = true;
 			if (destination != null):
 				destination._on_click()
+		else:
+			if train_progress != null and train_progress.progress_ratio >= .5:
+				train_progress = current_road.remove_path_child(current_road_path_key)
+				train_path.remove_at(0)
 	elif (train_progress != null and train_progress.progress_ratio >= max_progress):
 		train_path.remove_at(0)
 		if (train_path.size() > 0):
 			move_train_along()
+	elif (arrived == true and train_path.size() > 0):
+		arrived = false
+		move_train_along(true)

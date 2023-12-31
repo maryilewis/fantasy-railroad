@@ -18,7 +18,7 @@ var holding_mouse_click = false
 var path_progress = 0
 var speed = .05
 var path_refs = {}
-var paths
+var paths: PathNode
 var visible_roads
 #endregion
 
@@ -37,7 +37,7 @@ func build_road():
 		_is_buildable = false
 		_is_traversible = true
 		paths = path_scene.instantiate()
-		paths.init()
+		#paths.init()
 		add_child(paths)
 		visible_roads = visible_road_scene.instantiate()
 		visible_roads.init(map_x, map_y)

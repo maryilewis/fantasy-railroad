@@ -18,6 +18,7 @@ signal map_updated
 @onready var water = preload("res://Square Scenes/water/water.tscn")
 @onready var town = preload("res://Square Scenes/town/town.tscn")
 @onready var incline = preload("res://Square Scenes/incline/incline.tscn")
+@onready var city = preload("res://Square Scenes/city/city.tscn")
 
 var map_plan = []
 var map_nodes = []
@@ -34,7 +35,8 @@ enum SquareType {
 	FOREST = 4,
 	WHEAT = 5,
 	SHEEP = 6,
-	INCLINE = 7
+	INCLINE = 7,
+	CITY = 8
 }
 
 
@@ -44,6 +46,7 @@ func _ready():
 	Util.rng.seed = 12
 	init_map_data2(map_size)
 	add_inclines()
+	add_city()
 	print("creating map...")
 	create_map()
 
@@ -104,6 +107,17 @@ func add_inclines():
 		GameData.map_plan[i][54].elevation = 1
 		GameData.map_plan[i][53].elevation = 1
 
+func add_city():
+	for i in range (44,46):
+		for j in range (44,46):
+			GameData.map_plan[i][j] = {
+				"key": SquareType.FLAT
+			}
+	GameData.map_plan[45][45] = {
+		"key": SquareType.CITY
+	}
+
+
 
 func create_map():
 	var size = GameData.map_plan.size()
@@ -130,6 +144,8 @@ func create_map():
 					new_square = sheep.instantiate()
 				SquareType.INCLINE:
 					new_square = incline.instantiate()
+				SquareType.CITY:
+					new_square = city.instantiate()
 			if pow(pow(train_start-i, 2) + pow (train_start-j, 2), .5) > discovery_distance:
 				discovered = false
 			var y

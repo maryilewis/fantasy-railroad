@@ -5,7 +5,7 @@ var path_progress = 0
 var speed = .01
 var path_refs = {}
 
-func init():
+func _ready():
 	_init_path_refs()
 
 func _init_path_refs():
@@ -68,9 +68,9 @@ func _process(_delta):
 
 func remove_path_child(key):
 	path_refs[key]["transform"].remote_path = ""
-	path_refs[key]["follow"].progress = 0
 
 func add_path_child(key, node):
 	path_refs[key]["transform"].remote_path = node.get_path()
+	path_refs[key]["follow"].progress = 0
 	return path_refs[key]["follow"]
 
