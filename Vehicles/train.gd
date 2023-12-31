@@ -146,7 +146,9 @@ func _get_opposite(dir):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var max_progress = .99
-	if (train_path.size() == 1):
+	if (train_path.size() == 0):
+		pass
+	elif (train_path.size() == 1):
 		if !arrived:
 			arrived = true;
 			if (destination != null):
