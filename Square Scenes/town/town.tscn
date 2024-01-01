@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b72yw4xfmsjfc"]
+[gd_scene load_steps=9 format=3 uid="uid://b72yw4xfmsjfc"]
 
 [ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_10sw8"]
 [ext_resource type="Script" path="res://Square Scenes/city/city_script.gd" id="2_mybep"]
 [ext_resource type="Material" uid="uid://c0bfl4m6y763p" path="res://Square Scenes/forest/tree trunk2.tres" id="4_xx82m"]
+[ext_resource type="PackedScene" uid="uid://ba1m583rcgisx" path="res://Square Scenes/town/building.tscn" id="5_d3qr1"]
 [ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="5_kw5f5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_5oukg"]
@@ -41,3 +42,6 @@ mesh = SubResource("BoxMesh_5o01n")
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Building" index="4"]
 transform = Transform3D(-4.37114e-09, 0, 0.4, 0, 0.5, 0, -0.1, 0, -1.74846e-08, 0.0573421, 0.0452557, 0.453613)
 mesh = SubResource("BoxMesh_5o01n")
+
+[node name="building" parent="." index="2" instance=ExtResource("5_d3qr1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.12, 0.12, 0)
