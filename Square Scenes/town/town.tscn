@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b72yw4xfmsjfc"]
 
 [ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_10sw8"]
-[ext_resource type="Script" path="res://Square Scenes/city/city_script.gd" id="2_mybep"]
+[ext_resource type="Script" path="res://Square Scenes/town/town_script.gd" id="2_7dpw0"]
 [ext_resource type="Material" uid="uid://c0bfl4m6y763p" path="res://Square Scenes/forest/tree trunk2.tres" id="4_xx82m"]
 [ext_resource type="PackedScene" uid="uid://ba1m583rcgisx" path="res://Square Scenes/town/building.tscn" id="5_d3qr1"]
 [ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="5_kw5f5"]
@@ -16,7 +16,7 @@ material = ExtResource("5_kw5f5")
 material = ExtResource("4_xx82m")
 
 [node name="Town" instance=ExtResource("1_10sw8")]
-script = ExtResource("2_mybep")
+script = ExtResource("2_7dpw0")
 
 [node name="Building" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.615, 0)
