@@ -1,6 +1,10 @@
 class_name SquareBaseNode extends Node3D
 
 var discovered = true
+var discovery_effect_distance = 100;
+var discovery_effect_progress = 0
+var discovery_effect_increment = .5
+var zwooping = false
 
 #region build info
 @onready var flat_mesh = get_node("Flat/CollisionShape3D/MeshInstance3D")
@@ -59,8 +63,21 @@ func initialize(_map_x, _map_y, _position, _discovered):
 
 func discover():
 	if (!discovered):
+		global_position.y -= discovery_effect_distance
 		discovered = true
 		visible = true
+		discovery_effect_increment = Util.rng.randf_range(.4, .6)
+		zwooping = true
+
+func zwoop():
+	if (zwooping and discovery_effect_progress < discovery_effect_distance):
+		global_position.y += discovery_effect_increment
+		discovery_effect_progress += discovery_effect_increment
+		if (global_position.y > map_elevation):
+			global_position.y = map_elevation
+			zwooping = false
+	else:
+		zwooping = false
 
 func _on_click():
 	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
@@ -100,3 +117,5 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			else:
 				check_and_build_road()
 
+func _process(_delta):
+	zwoop()

@@ -3,8 +3,10 @@
 [resource]
 transparency = 1
 albedo_color = Color(0.45098, 0.960784, 0.901961, 0.501961)
-roughness = 0.0
+metallic = 1.0
 clearcoat_enabled = true
+clearcoat_roughness = 0.16
 anisotropy = -0.76
 subsurf_scatter_strength = 0.17
-refraction_scale = 0.27
+backlight = Color(0, 0.670588, 1, 1)
+refraction_scale = -1.0

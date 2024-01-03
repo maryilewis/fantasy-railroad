@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cdl5y03o54drt" path="res://World Map/underground.tscn" id="4_hp1to"]
 
 [sub_resource type="Environment" id="Environment_5u35n"]
-ssr_enabled = true
 glow_enabled = true
 
 [node name="World Map" type="Node3D"]
