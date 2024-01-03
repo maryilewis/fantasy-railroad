@@ -7,3 +7,4 @@ roughness = 0.0
 clearcoat_enabled = true
 anisotropy = -0.76
 subsurf_scatter_strength = 0.17
+refraction_scale = 0.27

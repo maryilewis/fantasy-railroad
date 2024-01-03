@@ -27,6 +27,7 @@ far = 200.0
 script = ExtResource("2_mbkis")
 
 [node name="underground" parent="." instance=ExtResource("4_hp1to")]
+visible = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_85n76")

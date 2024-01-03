@@ -146,7 +146,9 @@ func create_map():
 					new_square = incline.instantiate()
 				SquareType.CITY:
 					new_square = city.instantiate()
-			if pow(pow(train_start-i, 2) + pow (train_start-j, 2), .5) > discovery_distance:
+			if (node_def.has("discovered")):
+				discovered = node_def.get("discovered")
+			elif pow(pow(train_start-i, 2) + pow (train_start-j, 2), .5) > discovery_distance:
 				discovered = false
 			var y
 			if node_def.has("elevation"):
