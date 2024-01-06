@@ -59,20 +59,11 @@ fit_content = true
 layout_mode = 2
 theme = ExtResource("1_vtbdy")
 
-[node name="Close" type="Button" parent="Panel"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -31.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Close" type="Button" parent="Panel/MarginContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
 theme = ExtResource("1_vtbdy")
 text = "Close"
 
-[connection signal="pressed" from="Panel/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/Close" to="." method="_on_close_pressed"]
