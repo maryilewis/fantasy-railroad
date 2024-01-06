@@ -2,9 +2,11 @@ class_name SquareBaseNode extends Node3D
 
 var discovered = true
 var discovery_effect_distance = 100;
-var discovery_effect_progress = 0
 var discovery_effect_increment = .5
+var min_discovery_effect_increment = 40
+var max_discovery_effect_increment = 80
 var zwooping = false
+var actual_position: Vector3
 
 #region build info
 @onready var flat_mesh = get_node("Flat/CollisionShape3D/MeshInstance3D")
@@ -41,7 +43,6 @@ func build_road():
 		_is_buildable = false
 		_is_traversible = true
 		paths = path_scene.instantiate()
-		#paths.init()
 		add_child(paths)
 		visible_roads = visible_road_scene.instantiate()
 		visible_roads.init(map_x, map_y)
@@ -57,27 +58,26 @@ func initialize(_map_x, _map_y, _position, _discovered):
 	map_x = _map_x
 	map_y = _map_y
 	position = _position
+	actual_position = Vector3(position)
 	discovered = _discovered
 	if !discovered:
 		self.visible = false
 
 func discover():
 	if (!discovered):
-		global_position.y -= discovery_effect_distance
+		position.y -= discovery_effect_distance
 		discovered = true
 		visible = true
-		discovery_effect_increment = Util.rng.randf_range(.4, .6)
+		discovery_effect_increment = Util.rng.randf_range(min_discovery_effect_increment, max_discovery_effect_increment)
 		zwooping = true
 
-func zwoop():
-	if (zwooping and discovery_effect_progress < discovery_effect_distance):
-		global_position.y += discovery_effect_increment
-		discovery_effect_progress += discovery_effect_increment
-		if (global_position.y > map_elevation):
-			global_position.y = map_elevation
+func zwoop(delta):
+	if zwooping:
+		if (!position.is_equal_approx(actual_position)):
+			position = position.move_toward(actual_position, delta * discovery_effect_increment)
+		else:
+			position = actual_position
 			zwooping = false
-	else:
-		zwooping = false
 
 func _on_click():
 	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
@@ -117,5 +117,5 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			else:
 				check_and_build_road()
 
-func _process(_delta):
-	zwoop()
+func _process(delta):
+	zwoop(delta)
