@@ -49,7 +49,7 @@ func _ready():
 	create_map()
 
 func add_towns():
-	var spacing = 20
+	var spacing = 10
 	for i in range(map_size/spacing):
 		for j in range(map_size/spacing):
 			var k = (i * spacing) + Util.rng.randi_range(2, spacing - 2)
@@ -57,10 +57,35 @@ func add_towns():
 			add_town(k, l)
 
 func add_town(x, y):
+	if Util.rng.randi_range(0,1) == 0:
+		add_wheat_town(x, y)
+	else:
+		add_sheep_town(x, y)
+	
+func add_wheat_town(x, y):
+	for i in range(x-1, x+2):
+		for j in range(y-1, y+2):
+			map_plan[i][j] = {
+				"key": SquareType.WHEAT
+			}
+		
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
 		"products": CargoService.CargoType.GRAIN
 	}
+
+func add_sheep_town(x, y):
+	for i in range(x-1, x+2):
+		for j in range(y-1, y+2):
+			map_plan[i][j] = {
+				"key": SquareType.SHEEP
+			}
+		
+	map_plan[x][y] = {
+		"key": SquareType.TOWN,
+		"products": CargoService.CargoType.WOOL
+	}
+	
 			
 
 func init_map_data2(size):
@@ -92,14 +117,6 @@ func init_map_data2(size):
 				map_plan[i].append({
 					"key": SquareType.FOREST
 				})
-			elif (dice_roll >= 70):
-				map_plan[i].append({
-					"key": SquareType.WHEAT
-				})
-			elif (dice_roll >= 65):
-				map_plan[i].append({
-					"key": SquareType.SHEEP
-				})
 			else:
 				map_plan[i].append({
 					"key": SquareType.FLAT
@@ -115,8 +132,6 @@ func add_inclines():
 		}
 		GameData.map_plan[i][54].elevation = 1
 		GameData.map_plan[i][53].elevation = 1
-
-
 
 func create_map():
 	var size = GameData.map_plan.size()
