@@ -7,10 +7,9 @@ var job_menu
 var money = 200
 @onready var job_menu_ref = preload("res://Menus/Job List/Job List.tscn")
 
-
 func _generate_job_list():
 	for town in GameData.towns:
-		for cargo_type in Cargo.CargoType:
+		for cargo_type in CargoService.CargoType:
 			if (!town.products.has(cargo_type)):
 				_job_list.append({
 					"town": town,
@@ -31,7 +30,7 @@ func _calculate_payment(town: TownNode, cargo_type):
 	return shortest_distance
 
 func _init_visible_job_list():
-	for i in range(0, 9):
+	for i in range(0, 3):
 		visible_job_list.append(_job_list.pop_front())
 
 # Called when the node enters the scene tree for the first time.
@@ -64,7 +63,6 @@ func can_afford(amount):
 func update_menu_money():
 	MenuService.update_money(money)
 	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

@@ -19,7 +19,7 @@ func evaluate_visible_roads():
 
 func _pick_random_cargo():
 	var cargoArray = []
-	for c in Cargo.CargoType:
+	for c in CargoService.CargoType:
 		cargoArray.append(c)
 	products.append(cargoArray[randi_range(0, cargoArray.size() - 1)])
 

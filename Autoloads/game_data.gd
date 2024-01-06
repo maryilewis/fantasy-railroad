@@ -43,9 +43,25 @@ func _ready():
 	print("planning map...")
 	Util.rng.seed = 12
 	init_map_data2(map_size)
+	add_towns()
 	#add_inclines()
 	print("creating map...")
 	create_map()
+
+func add_towns():
+	var spacing = 20
+	for i in range(map_size/spacing):
+		for j in range(map_size/spacing):
+			var k = (i * spacing) + Util.rng.randi_range(2, spacing - 2)
+			var l = (j * spacing) + Util.rng.randi_range(2, spacing - 2)
+			add_town(k, l)
+
+func add_town(x, y):
+	map_plan[x][y] = {
+		"key": SquareType.TOWN,
+		"products": CargoService.CargoType.GRAIN
+	}
+			
 
 func init_map_data2(size):
 	var train_start = size/2
@@ -75,10 +91,6 @@ func init_map_data2(size):
 			elif (dice_roll >= 80):
 				map_plan[i].append({
 					"key": SquareType.FOREST
-				})
-			elif (dice_roll >= 75):
-				map_plan[i].append({
-					"key": SquareType.TOWN
 				})
 			elif (dice_roll >= 70):
 				map_plan[i].append({

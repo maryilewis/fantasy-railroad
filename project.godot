@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+CargoService="*res://Autoloads/cargo_service.gd"
 GameData="*res://Autoloads/game_data.gd"
 Util="*res://Autoloads/util.gd"
 TrainService="*res://Autoloads/train_service.gd"

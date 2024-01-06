@@ -1,34 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b87lxi3wranap"]
+[gd_scene load_steps=2 format=3 uid="uid://b87lxi3wranap"]
 
 [ext_resource type="Script" path="res://Cargo/cargo.gd" id="1_j4dps"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjrie"]
-albedo_color = Color(0.545098, 0, 0.0823529, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_youw7"]
-material = SubResource("StandardMaterial3D_rjrie")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwp0r"]
-albedo_color = Color(0.0313726, 0, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lqqnp"]
-material = SubResource("StandardMaterial3D_nwp0r")
-
 [node name="Cargo" type="Node3D"]
 script = ExtResource("1_j4dps")
-
-[node name="Red" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Red"]
-transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.4, 0, 0.13, 0)
-visible = false
-mesh = SubResource("BoxMesh_youw7")
-skeleton = NodePath("../..")
-
-[node name="Blue" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Blue"]
-transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.4, 0, 0.13, 0)
-visible = false
-mesh = SubResource("BoxMesh_lqqnp")
-skeleton = NodePath("../..")
