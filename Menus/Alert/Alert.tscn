@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3pgoi58c2r58"]
+
+[ext_resource type="Theme" uid="uid://da3vu24tysrq3" path="res://Menus/Themes/details_theme.tres" id="1_pmc2b"]
+[ext_resource type="Script" path="res://Menus/Alert/Alert.gd" id="2_jjscc"]
+
+[node name="Alert" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "town menu"
+mouse_filter = 1
+theme = ExtResource("1_pmc2b")
+script = ExtResource("2_jjscc")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pmc2b")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_pmc2b")
+text = "Alert!
+"
+fit_content = true
+
+[node name="OK" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_pmc2b")
+text = "OK"
+
+[connection signal="pressed" from="Panel/OK" to="." method="_on_ok_pressed"]

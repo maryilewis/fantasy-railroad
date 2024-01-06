@@ -56,7 +56,9 @@ func find_shortest_path(start_node, destination_coords):
 			var new_path = path.duplicate()
 			new_path.append(road)
 			queue.append(new_path)
-	print("no path found to target location")
+	# TODO: store strings in centralized location for localization
+	MenuService.show_alert("Destination Invalid:
+		Not connected by roads.")
 	return []
 	
 
@@ -128,7 +130,6 @@ func move_train_along(head_start = false):
 	current_road_path_key = entry_point + exit_point
 	train_progress = current_road.add_path_child(current_road_path_key, self)
 	if head_start:
-		print("head start yes")
 		train_progress.progress_ratio = .5
 
 

@@ -6,6 +6,7 @@
 [resource]
 default_font = ExtResource("1_0ku7b")
 default_font_size = 18
+AcceptDialog/styles/panel = ExtResource("1_oilly")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
