@@ -6,7 +6,7 @@ func _ready():
 
 
 func _process(_delta):
-	#daynight_demo()
+	daynight_demo()
 	pass
 
 

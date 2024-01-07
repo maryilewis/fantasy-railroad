@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgsuufqroigwm"]
+
+[ext_resource type="Script" path="res://Square Scenes/base.gd" id="1_h31v4"]
+[ext_resource type="Material" uid="uid://b307dfbyjne2e" path="res://Square Scenes/materials/flat.tres" id="2_xpiwj"]
+[ext_resource type="Material" uid="uid://c0bfl4m6y763p" path="res://Square Scenes/forest/tree trunk2.tres" id="3_hwwxk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gxxu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cuw3c"]
+material = ExtResource("2_xpiwj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ibp06"]
+material = ExtResource("3_hwwxk")
+
+[node name="base" type="Node3D"]
+script = ExtResource("1_h31v4")
+
+[node name="Flat" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat"]
+shape = SubResource("BoxShape3D_8gxxu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
+mesh = SubResource("BoxMesh_cuw3c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Flat/CollisionShape3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_ibp06")
+
+[connection signal="input_event" from="Flat" to="." method="_on_flat_input_event"]
+[connection signal="mouse_entered" from="Flat" to="." method="_on_hover"]
+[connection signal="mouse_exited" from="Flat" to="." method="_on_unhover"]

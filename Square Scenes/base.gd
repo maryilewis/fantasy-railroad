@@ -1,12 +1,7 @@
 class_name SquareBaseNode extends Node3D
 
 var discovered = true
-var discovery_effect_distance = 100;
-var discovery_effect_increment = .5
-var min_discovery_effect_increment = 40
-var max_discovery_effect_increment = 80
-var zwooping = false
-var actual_position: Vector3
+var discovery_effect_distance = 30;
 
 #region build info
 @onready var flat_mesh = get_node("Flat/CollisionShape3D/MeshInstance3D")
@@ -58,26 +53,19 @@ func initialize(_map_x, _map_y, _position, _discovered):
 	map_x = _map_x
 	map_y = _map_y
 	position = _position
-	actual_position = Vector3(position)
 	discovered = _discovered
 	if !discovered:
 		self.visible = false
 
 func discover():
 	if (!discovered):
+		var actual_position = Vector3(position)
 		position.y -= discovery_effect_distance
 		discovered = true
 		visible = true
-		discovery_effect_increment = Util.rng.randf_range(min_discovery_effect_increment, max_discovery_effect_increment)
-		zwooping = true
-
-func zwoop(delta):
-	if zwooping:
-		if (!position.is_equal_approx(actual_position)):
-			position = position.move_toward(actual_position, delta * discovery_effect_increment)
-		else:
-			position = actual_position
-			zwooping = false
+		var tween = get_tree().create_tween() # of self.create_tween()
+		var tween_length = 3 + Util.rng.randf_range(-1, 1)
+		tween.tween_property(self, "position", actual_position, tween_length).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_IN_OUT)
 
 func _on_click():
 	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
@@ -117,5 +105,5 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			else:
 				check_and_build_road()
 
-func _process(delta):
-	zwoop(delta)
+func _process(_delta):
+	pass
