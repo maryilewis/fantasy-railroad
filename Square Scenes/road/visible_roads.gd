@@ -3,9 +3,18 @@ class_name VisibleRoads extends MeshInstance3D
 var map_x
 var map_y
 @onready var west = get_node("West") # TODO try out
-var south
-var east
-var north
+@onready var south = get_node("South")
+@onready var east = get_node("East")
+@onready var north = get_node("North")
+@onready var pole = get_node("Pole")
+var all_meshes = []
+
+func _ready():
+	all_meshes.append(west)
+	all_meshes.append(south)
+	all_meshes.append(east)
+	all_meshes.append(north)
+	all_meshes.append(pole)
 
 func init(x,y):
 	map_x = x
@@ -19,28 +28,33 @@ func evaluate_visible_roads(show_if_no_connectors):
 	else:
 		west.hide()
 	if(map_x + 1 < GameData.map_nodes.size() and GameData.map_nodes[map_x + 1][map_y].is_traversible()):
-		$East.show()
+		east.show()
 		visible_count += 1
 	else:
-		$East.hide()
+		east.hide()
 	if(map_y > 0 and GameData.map_nodes[map_x][map_y - 1].is_traversible()):
-		$North.show()
+		north.show()
 		visible_count += 1
 	else:
-		$North.hide()
+		north.hide()
 	if(map_y + 1 < GameData.map_nodes[map_x].size() and GameData.map_nodes[map_x][map_y + 1].is_traversible()):
-		$South.show()
+		south.show()
 		visible_count += 1
 	else:
-		$South.hide()
+		south.hide()
 	if (show_if_no_connectors and visible_count == 0):
-		$West.show()
-		$East.show()
-		$North.show()
-		$South.show()
+		for dir in all_meshes:
+			dir.show()
 
 func hide_roads():
-	west.hide()
-	$East.hide()
-	$North.hide()
-	$South.hide()
+	for dir in all_meshes:
+		dir.hide()
+
+func set_custom_material(mat):
+	for dir in all_meshes:
+		dir.set_surface_override_material(0, mat)
+
+func clear_custom_material():
+	for dir in all_meshes:
+		dir.set_surface_override_material(0, null)
+

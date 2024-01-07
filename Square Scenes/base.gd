@@ -20,7 +20,8 @@ var path_progress = 0
 var speed = .05
 var path_refs = {}
 var paths: PathNode
-var visible_roads
+var visible_roads: VisibleRoads
+var preview_roads: VisibleRoads
 #endregion
 
 #region state
@@ -32,7 +33,7 @@ func is_traversible():
 
 func is_buildable():
 	return _is_buildable;
-
+	
 func build_road():
 	if (_is_buildable):
 		_is_buildable = false
@@ -79,7 +80,6 @@ func check_and_build_road():
 		GameData.build_road(map_x, map_y)
 		JobService.pay_for_road(road_cost)
 
-
 func add_path_child(key, node):
 	return paths.add_path_child(key, node)
 	
@@ -92,11 +92,16 @@ func _on_hover():
 		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
 			check_and_build_road()
 		# TODO Show price
-		flat_mesh.set_surface_override_material(0, hover_material)
+		preview_roads = visible_road_scene.instantiate()
+		preview_roads.init(map_x, map_y)
+		add_child(preview_roads)
+		preview_roads.set_custom_material(hover_material)
+		#flat_mesh.set_surface_override_material(0, hover_material)
 
 func _on_unhover():
-	if (flat_mesh != null):
-		flat_mesh.set_surface_override_material(0, null)
+	if (preview_roads != null):
+		preview_roads.hide_roads()
+		preview_roads.clear_custom_material()
 
 # todo click and drag to build
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
