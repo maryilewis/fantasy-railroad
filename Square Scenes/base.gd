@@ -68,14 +68,17 @@ func discover():
 		tween.tween_property(self, "position", actual_position, tween_length).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_IN_OUT)
 
 func _on_click():
-	if (is_traversible() and CursorService.cursor_state == CursorService.CursorState.SELECTING_TRAIN_DESTINATION):
+	if (is_traversible()):
 		CursorService.set_train_destination(self)
+	else:
+		check_and_build_road()
 
 func check_and_build_road():
 	# TODO: road previews instead of actual roads
-	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
+	if (is_buildable()):
 		GameData.build_road(map_x, map_y)
 		JobService.pay_for_road(road_cost)
+
 
 func add_path_child(key, node):
 	return paths.add_path_child(key, node)
@@ -85,7 +88,7 @@ func remove_path_child(key):
 
 func _on_hover():
 	MenuService.update_location(map_x, map_y)
-	if (is_buildable() and CursorService.cursor_state == CursorService.CursorState.BUILDING):
+	if (is_buildable()):
 		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
 			check_and_build_road()
 		# TODO Show price
@@ -99,11 +102,9 @@ func _on_unhover():
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT):
-			if (event.is_released()):
+			if (event.is_pressed()):
 				_on_click()
-				# TODO: actually build the previewed roads
-			else:
-				check_and_build_road()
+
 
 func _process(_delta):
 	pass

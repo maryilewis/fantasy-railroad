@@ -10,13 +10,6 @@ func _ready():
 func get_engine():
 	return $Train
 
-func disable_click():
-	#$Train/CollisionShape3D.disabled = true
-	pass
-func enable_click():
-	#$Train/CollisionShape3D.disabled = false
-	pass
-
 func pick_up_cargo(cargo):
 	cargo_list.append(cargo)
 	MenuService.update_cargo_list()

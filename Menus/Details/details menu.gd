@@ -8,14 +8,6 @@ func _ready():
 func add_job_menu(job_menu):
 	$TabContainer/Jobs.add_child(job_menu)
 
-func _on_destination_button_pressed():
-	CursorService.set_selecting_train_destination()
-	# TODO camera train and target train CAN BE DIFFERENT
-	TrainService.set_target_train(GameData.train_camera.get_follow_ref())
-
-func _on_build_button_pressed():
-	CursorService.set_building()
-
 #  TODO Maybe trainservice should call to add this to stay consistent with Job Service?
 func update_cargo_list():
 	var text = "Cargo: "
