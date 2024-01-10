@@ -2,6 +2,7 @@ class_name SquareBaseNode extends Node3D
 
 var discovered = true
 var discovery_effect_distance = 30;
+var tween: Tween
 
 #region build info
 @onready var flat_mesh = get_node("Flat/CollisionShape3D/MeshInstance3D")
@@ -64,7 +65,7 @@ func discover():
 		position.y -= discovery_effect_distance
 		discovered = true
 		visible = true
-		var tween = get_tree().create_tween() # of self.create_tween()
+		tween = get_tree().create_tween() # of self.create_tween()
 		var tween_length = 3 + Util.rng.randf_range(-1, 1)
 		tween.tween_property(self, "position", actual_position, tween_length).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_IN_OUT)
 

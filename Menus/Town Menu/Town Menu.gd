@@ -23,24 +23,24 @@ func set_town(_town):
 	#add new butons
 	jobs = JobService.get_jobs_by_town(town)
 	for job in jobs:
-		var button = Button.new()
-		button.text = "Deliver " + job.cargo + " " + str(job.payment)
-		button.pressed.connect(complete_job.bind(job))
-		list_container.add_child(button)
-		button.set_meta("type", "job")
-		button.set_meta("job", job)
+		var job_button = Button.new()
+		job_button.text = "Deliver " + job.cargo + " " + str(job.payment)
+		job_button.pressed.connect(complete_job.bind(job))
+		list_container.add_child(job_button)
+		job_button.set_meta("type", "job")
+		job_button.set_meta("job", job)
 	for product in town.products:
-		var button = Button.new()
-		button.text = "Pick up " + product
-		button.pressed.connect(pick_up_cargo.bind(product))
-		list_container.add_child(button)
-		button.set_meta("type", "cargo")
-		button.set_meta("cargo", product)
-	var button = Button.new()
-	button.text = "Set Destination"
-	button.set_meta("type", "destination")
-	button.pressed.connect(set_destination)
-	list_container.add_child(button)
+		var town_button = Button.new()
+		town_button.text = "Pick up " + product
+		town_button.pressed.connect(pick_up_cargo.bind(product))
+		list_container.add_child(town_button)
+		town_button.set_meta("type", "cargo")
+		town_button.set_meta("cargo", product)
+	var destination_button = Button.new()
+	destination_button.text = "Set Destination"
+	destination_button.set_meta("type", "destination")
+	destination_button.pressed.connect(set_destination)
+	list_container.add_child(destination_button)
 	evaluate_buttonability()
 
 func set_destination():

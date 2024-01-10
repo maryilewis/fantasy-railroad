@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Fantasy Railroad"
 run/main_scene="res://World Map/World Map.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]

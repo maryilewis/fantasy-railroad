@@ -6,10 +6,10 @@ func _ready():
 
 
 func _process(_delta):
-	daynight_demo()
+	#daynight_demo()
 	pass
 
-
+#region color nonsense
 var color_percent = 0
 var up = true
 const daylight_speed = .001	
@@ -28,9 +28,12 @@ func daynight_demo():
 
 
 # TODO Move to util
+# TODO use tween!
 func color_lerp(color1: Color, color2: Color, percent: float):
 	var r = color1.r * (1 - percent) + color2.r * percent
 	var g = color1.g * (1 - percent) + color2.g * percent
 	var b = color1.b * (1 - percent) + color2.b * percent
 	var a = color1.a * (1 - percent) + color2.a * percent
 	return Color(r, g, b, a)
+
+#endregion
