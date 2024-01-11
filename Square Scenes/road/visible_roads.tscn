@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bksinyq3m8tkn"]
 
 [ext_resource type="Script" path="res://Square Scenes/road/visible_roads.gd" id="1_rwffn"]
-[ext_resource type="Material" uid="uid://4tjna4v7bu7u" path="res://Square Scenes/road/visible_roads.tres" id="2_01ims"]
+[ext_resource type="Material" uid="uid://4tjna4v7bu7u" path="res://Square Scenes/materials/visible_roads.tres" id="2_01ims"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8232e"]
 material = ExtResource("2_01ims")

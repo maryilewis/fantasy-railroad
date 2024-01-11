@@ -20,5 +20,5 @@ func make_night():
 func make_day():
 	var day_tween = get_tree().create_tween()
 	day_tween.tween_property($DirectionalLight3D, "light_color", Color.WHITE, 5)
-	day_tween.tween_callback(make_night).set_delay(30)
+	#day_tween.tween_callback(make_night).set_delay(30)
 #endregion
