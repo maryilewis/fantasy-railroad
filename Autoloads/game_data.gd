@@ -37,7 +37,6 @@ enum SquareType {
 	INCLINE = 7
 }
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("planning map...")
@@ -57,10 +56,16 @@ func add_towns():
 			add_town(k, l)
 
 func add_town(x, y):
-	if Util.rng.randi_range(0,1) == 0:
-		add_wheat_town(x, y)
-	else:
-		add_sheep_town(x, y)
+	var rand = Util.rng.randi_range(0,3)
+	match(rand):
+		0:
+			add_wheat_town(x, y)
+		1:
+			add_sheep_town(x, y)
+		2:
+			add_mill_town(x, y)
+		3:
+			add_weaver_town(x, y)
 	
 func add_wheat_town(x, y):
 	for i in range(x-1, x+2):
@@ -71,7 +76,7 @@ func add_wheat_town(x, y):
 		
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
-		"products": CargoService.CargoType.GRAIN
+		"product": CargoService.CargoType.GRAIN
 	}
 
 func add_sheep_town(x, y):
@@ -83,10 +88,28 @@ func add_sheep_town(x, y):
 		
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
-		"products": CargoService.CargoType.WOOL
+		"product": CargoService.CargoType.WOOL,
+		"want": CargoService.CargoType.GRAIN
 	}
 	
-			
+func add_mill_town(x, y):
+	for i in range(x-1, x+2):
+		map_plan[i][y] = {
+			"key": SquareType.WATER
+		}
+		
+	map_plan[x][y] = {
+		"key": SquareType.TOWN,
+		"product": CargoService.CargoType.FLOUR,
+		"want": CargoService.CargoType.GRAIN
+	}
+	
+func add_weaver_town(x, y):
+	map_plan[x][y] = {
+		"key": SquareType.TOWN,
+		"product": CargoService.CargoType.CLOTHING,
+		"want": CargoService.CargoType.WOOL
+	}
 
 func init_map_data2(size):
 	var train_start = size/2
@@ -152,6 +175,10 @@ func create_map():
 				SquareType.TOWN:
 					new_square = town.instantiate()
 					towns.append(new_square)
+					if (node_def.has("product")):
+						new_square.add_product(node_def.product)
+					if (node_def.has("want")):
+						new_square.add_want(node_def.want)
 				SquareType.WHEAT:
 					new_square = wheat.instantiate()
 				SquareType.SHEEP:

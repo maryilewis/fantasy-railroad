@@ -1,5 +1,11 @@
 extends Node
-enum CargoType {GRAIN, FLOUR, WOOL, BREAD, CLOTHING}
+enum CargoType {
+	GRAIN = 1,
+	FLOUR = 2,
+	WOOL = 3,
+	BREAD = 4,
+	CLOTHING = 5
+}
 var cargo_defs
 
 func _ready():
@@ -22,4 +28,4 @@ func _ready():
 	}
 
 func get_display_name(value):
-	return cargo_defs.get(value).display_name
+	return cargo_defs[value].display_name

@@ -6,7 +6,7 @@ func _ready():
 
 
 func _process(_delta):
-	#daynight_demo()
+	daynight_demo()
 	pass
 
 #region color nonsense
@@ -24,7 +24,7 @@ func daynight_demo():
 	elif color_percent < 0:
 		up = true
 		color_percent = 0
-	$DirectionalLight3D.light_color = color_lerp(Color.WHITE, Color.DARK_BLUE, color_percent)
+	$DirectionalLight3D.light_color = color_lerp(Color.WHITE, Color.MIDNIGHT_BLUE, color_percent)
 
 
 # TODO Move to util

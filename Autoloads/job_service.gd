@@ -1,22 +1,22 @@
 extends Node
 ## List of jobs in the word
 
-var _job_list = []
+var job_list = []
 var visible_job_list = []
 var job_menu
 var money = 200
 @onready var job_menu_ref = preload("res://Menus/Job List/Job List.tscn")
 
-func _generate_job_list():
+func generate_job_list():
 	for town in GameData.towns:
-		for cargo_type in CargoService.CargoType:
-			if (!town.products.has(cargo_type)):
-				_job_list.append({
-					"town": town,
-					"cargo": cargo_type,
-					"payment": _calculate_payment(town, cargo_type)
-				})
-	_job_list = Util.shuffle(_job_list)
+		for cargo_type in town.wants:
+			print("town wants", cargo_type)
+			job_list.append({
+				"town": town,
+				"cargo": cargo_type,
+				"payment": _calculate_payment(town, cargo_type)
+			})
+	job_list = Util.shuffle(job_list)
 
 func _calculate_payment(town: TownNode, cargo_type):
 	var shortest_distance = GameData.map_size * 2 + 1
@@ -29,28 +29,26 @@ func _calculate_payment(town: TownNode, cargo_type):
 				#closest_source = source_town
 	return shortest_distance
 
-func _init_visible_job_list():
-	for i in range(0, 3):
-		visible_job_list.append(_job_list.pop_front())
+func init_visible_job_list():
+	visible_job_list = job_list.filter(func(job): return job.town.discovered)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("generating jobs...")
-	_generate_job_list()
-	_init_visible_job_list()
+	generate_job_list()
+	init_visible_job_list()
 	job_menu = job_menu_ref.instantiate()
 	job_menu.set_jobs(visible_job_list)
 	MenuService.add_job_menu(job_menu)
 	update_menu_money()
 
 func get_jobs_by_town(town):
-	return visible_job_list.filter(func(job): return job.town == town)
+	return job_list.filter(func(job): return job.town == town)
 	
 func complete_job(job):
 	money += job.payment
 	update_menu_money()
-	visible_job_list.erase(job)
-	visible_job_list.append(_job_list.pop_front())
+	# TODO update visible job list based on market changes
 	job_menu.set_jobs(visible_job_list)
 	
 func pay_for_road(amount):

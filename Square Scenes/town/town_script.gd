@@ -1,7 +1,8 @@
 class_name TownNode extends SquareBaseNode
 
-var display_name ="Cool Town Name"
+var display_name = "Cool Town Name"
 var products = [] # array of type CargoType value
+var wants = [] # array of type CargoType value
 var jobs = [] # array of jobs
 
 func zoom_to_town():
@@ -10,18 +11,19 @@ func zoom_to_town():
 
 func _ready():
 	build_road()
-	_pick_random_cargo()
 	display_name = _random_town_name()
+
+func add_product(new_product):
+	if not products.has(new_product):
+		products.append(new_product)
+
+func add_want(new_want):
+	if not wants.has(new_want):
+		wants.append(new_want)
 
 func evaluate_visible_roads():
 	if (visible_roads != null):
 		visible_roads.evaluate_visible_roads(false)
-
-func _pick_random_cargo():
-	var cargoArray = []
-	for c in CargoService.CargoType:
-		cargoArray.append(c)
-	products.append(cargoArray[randi_range(0, cargoArray.size() - 1)])
 
 func _random_town_name():
 	var ends = ["burg", "ton", " Town", " City", "ville", "sville", "town", " Place"]

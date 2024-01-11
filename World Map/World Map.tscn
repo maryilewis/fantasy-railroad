@@ -1,13 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds25bg34pn02h"]
+[gd_scene load_steps=8 format=3 uid="uid://ds25bg34pn02h"]
 
 [ext_resource type="Script" path="res://World Map/world_map.gd" id="1_5q762"]
 [ext_resource type="Script" path="res://World Map/world_camera.gd" id="2_mbkis"]
 [ext_resource type="AudioStream" uid="uid://ct4w3wmspd04h" path="res://Assets/Music/Train Song Current Good One.wav" id="4_85n76"]
 [ext_resource type="PackedScene" uid="uid://cdl5y03o54drt" path="res://World Map/underground.tscn" id="4_hp1to"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a1cbu"]
+sky_top_color = Color(0.100186, 0.147171, 0.374995, 1)
+sky_horizon_color = Color(0.0760578, 0.112057, 0.274673, 1)
+ground_bottom_color = Color(0.0760578, 0.112057, 0.274673, 1)
+ground_horizon_color = Color(0.0760578, 0.112057, 0.274673, 1)
+
+[sub_resource type="Sky" id="Sky_njn6u"]
+sky_material = SubResource("ProceduralSkyMaterial_a1cbu")
+
 [sub_resource type="Environment" id="Environment_5u35n"]
+background_mode = 2
+sky = SubResource("Sky_njn6u")
 glow_enabled = true
-glow_bloom = 0.48
+glow_strength = 0.73
+glow_bloom = 0.15
+glow_blend_mode = 0
 fog_light_color = Color(1, 0.870588, 0.603922, 1)
 fog_light_energy = 0.01
 

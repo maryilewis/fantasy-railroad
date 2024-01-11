@@ -19,7 +19,7 @@ func populate_job_list():
 		var hbc = HBoxContainer.new()
 		list_container.add_child(hbc)
 		var label = Label.new()
-		label.text = "$" + str(job.payment) + ": " + job.cargo + " to "
+		label.text = "$" + str(job.payment) + ": " + CargoService.get_display_name(job.cargo) + " to "
 		hbc.add_child(label)
 		var link = LinkButton.new()
 		link.text = job.town.display_name

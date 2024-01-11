@@ -64,7 +64,10 @@ func _process(_delta):
 	for key in path_refs:
 		var current = path_refs[key]
 		if (current["transform"].remote_path):
-			current["follow"].progress += speed
+			var new_progress = current["follow"].progress + speed
+			if (new_progress > 1):
+				new_progress = 1
+			current["follow"].progress = new_progress
 
 func remove_path_child(key):
 	path_refs[key]["transform"].remote_path = ""

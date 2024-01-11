@@ -24,14 +24,14 @@ func set_town(_town):
 	jobs = JobService.get_jobs_by_town(town)
 	for job in jobs:
 		var job_button = Button.new()
-		job_button.text = "Deliver " + job.cargo + " " + str(job.payment)
+		job_button.text = "Deliver " + CargoService.get_display_name(job.cargo) + " " + str(job.payment)
 		job_button.pressed.connect(complete_job.bind(job))
 		list_container.add_child(job_button)
 		job_button.set_meta("type", "job")
 		job_button.set_meta("job", job)
 	for product in town.products:
 		var town_button = Button.new()
-		town_button.text = "Pick up " + product
+		town_button.text = "Pick up " + CargoService.get_display_name(product)
 		town_button.pressed.connect(pick_up_cargo.bind(product))
 		list_container.add_child(town_button)
 		town_button.set_meta("type", "cargo")

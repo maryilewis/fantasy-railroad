@@ -41,33 +41,41 @@ theme = ExtResource("1_fkumv")
 layout_mode = 2
 theme = ExtResource("1_fkumv")
 
+[node name="Cargo Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_fkumv")
+text = "Cargo:"
+
+[node name="Cargo" type="VBoxContainer" parent="TabContainer/Trains/VBoxContainer"]
+layout_mode = 2
+
 [node name="Follow Train" type="Button" parent="TabContainer/Trains/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_fkumv")
 text = "Watch Train"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="TabContainer/Trains/VBoxContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TabContainer/Trains/VBoxContainer/Follow Train"]
 clip_contents = true
 layout_mode = 2
+offset_top = 38.0
+offset_right = 200.0
+offset_bottom = 249.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource("1_fkumv")
 
-[node name="SubViewport" type="SubViewport" parent="TabContainer/Trains/VBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="TabContainer/Trains/VBoxContainer/Follow Train/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(200, 150)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
-[node name="TrainCam" type="Camera3D" parent="TabContainer/Trains/VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="TrainCam" type="Camera3D" parent="TabContainer/Trains/VBoxContainer/Follow Train/SubViewportContainer/SubViewport"]
 transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 10, 5, 10)
 projection = 1
 size = 2.0
 far = 200.0
 script = ExtResource("3_ajdt1")
-
-[node name="Cargo Label" type="Label" parent="TabContainer/Trains/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_fkumv")
 
 [node name="Jobs" type="Panel" parent="TabContainer"]
 visible = false
