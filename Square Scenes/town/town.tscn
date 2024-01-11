@@ -20,6 +20,7 @@ script = ExtResource("2_7dpw0")
 
 [node name="Building" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.615, 0)
+visible = false
 mesh = SubResource("BoxMesh_5oukg")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Building" index="0"]

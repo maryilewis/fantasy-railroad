@@ -40,7 +40,6 @@ enum SquareType {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("planning map...")
-	Util.rng.seed = 12
 	init_map_data2(map_size)
 	add_towns()
 	#add_inclines()

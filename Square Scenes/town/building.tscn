@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba1m583rcgisx"]
+[gd_scene load_steps=6 format=3 uid="uid://ba1m583rcgisx"]
+
+[ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="1_cdsjh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diq8r"]
 resource_name = "Material"
@@ -39,8 +41,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wjkly")
 
+[sub_resource type="BoxMesh" id="BoxMesh_0klei"]
+material = ExtResource("1_cdsjh")
+
 [node name="building" type="Node3D"]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_qrmag")
 skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.3, 0, 0, 0, 0.37, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_0klei")

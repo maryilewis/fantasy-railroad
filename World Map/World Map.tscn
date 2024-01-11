@@ -18,12 +18,11 @@ sky_material = SubResource("ProceduralSkyMaterial_a1cbu")
 background_mode = 1
 sky = SubResource("Sky_njn6u")
 glow_enabled = true
-glow_strength = 0.73
-glow_bloom = 0.15
-glow_blend_mode = 0
-fog_enabled = true
-fog_light_color = Color(1, 0.870588, 0.603922, 1)
+glow_bloom = 0.14
+glow_blend_mode = 4
+fog_light_color = Color(1, 1, 1, 1)
 fog_light_energy = 0.01
+fog_height = 2.0
 
 [node name="World Map" type="Node3D"]
 script = ExtResource("1_5q762")

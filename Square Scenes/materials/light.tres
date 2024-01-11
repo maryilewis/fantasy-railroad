@@ -7,4 +7,5 @@ metallic = 0.15
 roughness = 0.0
 emission_enabled = true
 emission = Color(0.94902, 0.92549, 0.752941, 1)
+emission_energy_multiplier = 3.5
 clearcoat_enabled = true
