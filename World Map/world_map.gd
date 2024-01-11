@@ -3,37 +3,24 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameData.world_camera = $Camera3D
-
+	daynight_demo()
 
 func _process(_delta):
-	daynight_demo()
 	pass
 
 #region color nonsense
-var color_percent = 0
-var up = true
-const daylight_speed = .001	
 func daynight_demo():
-	if up:
-		color_percent += daylight_speed
-	else:
-		color_percent -= daylight_speed
-	if color_percent > 1:
-		up = false;
-		color_percent = 1
-	elif color_percent < 0:
-		up = true
-		color_percent = 0
-	$DirectionalLight3D.light_color = color_lerp(Color.WHITE, Color.MIDNIGHT_BLUE, color_percent)
+	make_day()
 
+func make_night():
+	print("make night")
+	var night_tween = get_tree().create_tween() # or self.create_tween()?
+	night_tween.tween_property($DirectionalLight3D, "light_color", Color.MIDNIGHT_BLUE, 10)
+	night_tween.tween_callback(make_day).set_delay(1)
 
-# TODO Move to util
-# TODO use tween!
-func color_lerp(color1: Color, color2: Color, percent: float):
-	var r = color1.r * (1 - percent) + color2.r * percent
-	var g = color1.g * (1 - percent) + color2.g * percent
-	var b = color1.b * (1 - percent) + color2.b * percent
-	var a = color1.a * (1 - percent) + color2.a * percent
-	return Color(r, g, b, a)
-
+func make_day():
+	print("make day")
+	var day_tween = get_tree().create_tween()
+	day_tween.tween_property($DirectionalLight3D, "light_color", Color.WHITE, 10)
+	day_tween.tween_callback(make_night).set_delay(30)
 #endregion

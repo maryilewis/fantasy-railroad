@@ -15,12 +15,13 @@ ground_horizon_color = Color(0.0760578, 0.112057, 0.274673, 1)
 sky_material = SubResource("ProceduralSkyMaterial_a1cbu")
 
 [sub_resource type="Environment" id="Environment_5u35n"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_njn6u")
 glow_enabled = true
 glow_strength = 0.73
 glow_bloom = 0.15
 glow_blend_mode = 0
+fog_enabled = true
 fog_light_color = Color(1, 0.870588, 0.603922, 1)
 fog_light_energy = 0.01
 
