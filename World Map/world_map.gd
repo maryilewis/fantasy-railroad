@@ -13,13 +13,11 @@ func daynight_demo():
 	make_day()
 
 func make_night():
-	print("make night")
 	var night_tween = get_tree().create_tween() # or self.create_tween()?
-	night_tween.tween_property($DirectionalLight3D, "light_color", Color.MIDNIGHT_BLUE, 10)
-	night_tween.tween_callback(make_day).set_delay(1)
+	night_tween.tween_property($DirectionalLight3D, "light_color", Color.MIDNIGHT_BLUE, 8)
+	night_tween.tween_callback(make_day)
 
 func make_day():
-	print("make day")
 	var day_tween = get_tree().create_tween()
 	day_tween.tween_property($DirectionalLight3D, "light_color", Color.WHITE, 10)
 	day_tween.tween_callback(make_night).set_delay(30)

@@ -38,6 +38,7 @@ func show_town_menu(town):
 #region details menu
 func update_cargo_list():
 	details_menu.update_cargo_list()
+	town_menu.evaluate_buttonability()
 func update_money(money):
 	details_menu.update_money(money)
 func add_job_menu(job_menu):
