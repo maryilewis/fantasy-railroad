@@ -195,7 +195,8 @@ func discover_map(x, y):
 	for i in range(x - discovery_distance, x + discovery_distance):
 		for j in range(y - discovery_distance, y + discovery_distance):
 			if pow(pow(x-i, 2) + pow (y-j, 2), .5) <= discovery_distance:
-				map_nodes[i][j].discover()
+				if map_size > i && map_size > j && i > 0 && j > 0:
+					map_nodes[i][j].discover()
 
 #region building
 func build_road(x, y):
