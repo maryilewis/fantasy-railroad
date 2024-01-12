@@ -38,6 +38,8 @@ func is_buildable():
 	
 func build_road():
 	if (_is_buildable):
+		hide_build_cost_preview()
+		# todo: add a little number that rises and fades
 		_is_buildable = false
 		_is_traversible = true
 		paths = path_scene.instantiate()
@@ -99,14 +101,14 @@ func _on_hover():
 		add_child(preview_roads)
 		preview_roads.set_custom_material(hover_material)
 		# show price
-		show_build_preview()
+		show_build_cost_preview()
 
 func _on_unhover():
 	if (preview_roads != null):
-		preview_roads.hide_roads()
-		preview_roads.clear_custom_material()
+		remove_child(preview_roads)
+		preview_roads.queue_free()
 		# hide build price
-		hide_build_preview()
+		hide_build_cost_preview()
 
 # todo click and drag to build
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
@@ -116,14 +118,16 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 				_on_click()
 
 var build_cost_preview
-func show_build_preview():
+func show_build_cost_preview():
 	build_cost_preview = build_preview_scene.instantiate()
-	build_cost_preview.position = get_viewport().get_mouse_position()
+	build_cost_preview.global_position = GameData.world_camera.unproject_position(self.global_position)
+	build_cost_preview.set_text("Build: -" + str(road_cost))
 	add_child(build_cost_preview)
 
-func hide_build_preview():
-	remove_child(build_cost_preview)
-	build_cost_preview.queue_free()
+func hide_build_cost_preview():
+	if (build_cost_preview != null):
+		remove_child(build_cost_preview)
+		build_cost_preview.queue_free()
 
 func _process(_delta):
 	pass

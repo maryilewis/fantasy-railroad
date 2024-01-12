@@ -10,7 +10,6 @@ var money = 200
 func generate_job_list():
 	for town in GameData.towns:
 		for cargo_type in town.wants:
-			print("town wants", cargo_type)
 			job_list.append({
 				"town": town,
 				"cargo": cargo_type,
