@@ -28,3 +28,7 @@ CursorService="*res://Autoloads/cursor_service.gd"
 [debug]
 
 gdscript/warnings/integer_division=0
+
+[filesystem]
+
+import/fbx/enabled=false

@@ -4,6 +4,7 @@ var display_name = "Cool Town Name"
 var products = [] # array of type CargoType value
 var wants = [] # array of type CargoType value
 var jobs = [] # array of jobs
+var town_type: GameData.TownType
 
 func zoom_to_town():
 	print("zoom to ", display_name)
@@ -12,6 +13,14 @@ func zoom_to_town():
 func _ready():
 	build_road()
 	display_name = _random_town_name()
+	# TODO show building based on type
+
+func set_town_type(new_town_type):
+	town_type = new_town_type
+	match town_type:
+		GameData.TownType.GRAIN_FARM:
+			$Silo.show()
+			$Inn.hide()
 
 func add_product(new_product):
 	if not products.has(new_product):

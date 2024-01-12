@@ -37,6 +37,14 @@ enum SquareType {
 	INCLINE = 7
 }
 
+enum TownType {
+	INN = 1,
+	MILL = 2,
+	GRAIN_FARM = 3,
+	SHEEP_FARM = 4,
+	WEAVER = 5
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("planning map...")
@@ -75,7 +83,8 @@ func add_wheat_town(x, y):
 		
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
-		"product": CargoService.CargoType.GRAIN
+		"product": CargoService.CargoType.GRAIN,
+		"town_type": TownType.GRAIN_FARM
 	}
 
 func add_sheep_town(x, y):
@@ -88,7 +97,8 @@ func add_sheep_town(x, y):
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
 		"product": CargoService.CargoType.WOOL,
-		"want": CargoService.CargoType.GRAIN
+		"want": CargoService.CargoType.GRAIN,
+		"town_type": TownType.SHEEP_FARM
 	}
 	
 func add_mill_town(x, y):
@@ -100,14 +110,16 @@ func add_mill_town(x, y):
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
 		"product": CargoService.CargoType.FLOUR,
-		"want": CargoService.CargoType.GRAIN
+		"want": CargoService.CargoType.GRAIN,
+		"town_type": TownType.MILL
 	}
 	
 func add_weaver_town(x, y):
 	map_plan[x][y] = {
 		"key": SquareType.TOWN,
 		"product": CargoService.CargoType.CLOTHING,
-		"want": CargoService.CargoType.WOOL
+		"want": CargoService.CargoType.WOOL,
+		"town_type": TownType.WEAVER
 	}
 
 func init_map_data2(size):
@@ -178,6 +190,8 @@ func create_map():
 						new_square.add_product(node_def.product)
 					if (node_def.has("want")):
 						new_square.add_want(node_def.want)
+					if (node_def.has("town_type")):
+						new_square.set_town_type(node_def.town_type)
 				SquareType.WHEAT:
 					new_square = wheat.instantiate()
 				SquareType.SHEEP:

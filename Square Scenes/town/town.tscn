@@ -1,48 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://b72yw4xfmsjfc"]
+[gd_scene load_steps=6 format=3 uid="uid://b72yw4xfmsjfc"]
 
 [ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_10sw8"]
 [ext_resource type="Script" path="res://Square Scenes/town/town_script.gd" id="2_7dpw0"]
-[ext_resource type="Material" uid="uid://c0bfl4m6y763p" path="res://Square Scenes/forest/tree trunk2.tres" id="4_xx82m"]
+[ext_resource type="PackedScene" uid="uid://xkic6epux3xf" path="res://Assets/Quaternius/Towns/Fantasy Inn.glb" id="4_lssyb"]
+[ext_resource type="PackedScene" uid="uid://btqe6ug3j46th" path="res://Assets/Quaternius/Towns/Silo House.glb" id="5_27r3y"]
 [ext_resource type="PackedScene" uid="uid://ba1m583rcgisx" path="res://Square Scenes/town/building.tscn" id="5_d3qr1"]
-[ext_resource type="Material" uid="uid://p5kmpiqkcdmb" path="res://Square Scenes/materials/light.tres" id="5_kw5f5"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_5oukg"]
-material = ExtResource("4_xx82m")
-
-[sub_resource type="BoxMesh" id="BoxMesh_5o01n"]
-material = ExtResource("5_kw5f5")
-
-[sub_resource type="PrismMesh" id="PrismMesh_d2d2l"]
-material = ExtResource("4_xx82m")
 
 [node name="Town" instance=ExtResource("1_10sw8")]
 script = ExtResource("2_7dpw0")
 
-[node name="Building" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.615, 0)
-visible = false
-mesh = SubResource("BoxMesh_5oukg")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Building" index="0"]
-transform = Transform3D(0.01, 0, 0, 0, 0.25, 0, 0, 0, 0.64, 0.552903, -0.0656614, 0)
-mesh = SubResource("BoxMesh_5o01n")
-skeleton = NodePath("../MeshInstance3D2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Building" index="1"]
-transform = Transform3D(1.3, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.7, 0)
-mesh = SubResource("PrismMesh_d2d2l")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Building" index="2"]
-transform = Transform3D(0.0999934, 0, -0.0034452, 0, 0.4, 0, 0.0011484, 0, 0.29998, -0.456711, 0.0452557, 0)
-mesh = SubResource("BoxMesh_5o01n")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Building" index="3"]
-transform = Transform3D(-4.37114e-09, 0, 0.5, 0, 0.5, 0, -0.1, 0, -2.18557e-08, -0.0214086, 0.0452557, -0.476318)
-mesh = SubResource("BoxMesh_5o01n")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Building" index="4"]
-transform = Transform3D(-4.37114e-09, 0, 0.4, 0, 0.5, 0, -0.1, 0, -1.74846e-08, 0.0573421, 0.0452557, 0.453613)
-mesh = SubResource("BoxMesh_5o01n")
-
-[node name="building" parent="." index="2" instance=ExtResource("5_d3qr1")]
+[node name="building" parent="." index="1" instance=ExtResource("5_d3qr1")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.12, 0.12, 0)
+visible = false
+
+[node name="Inn" parent="." index="2" instance=ExtResource("4_lssyb")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.5, 0)
+
+[node name="Silo" parent="." index="3" instance=ExtResource("5_27r3y")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.5, 0)
+visible = false
