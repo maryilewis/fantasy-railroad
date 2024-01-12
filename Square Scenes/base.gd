@@ -9,6 +9,7 @@ var tween: Tween
 var hover_material = preload("res://Square Scenes/materials/light.tres")
 var path_scene = preload("res://Square Scenes/road/paths.tscn")
 var visible_road_scene = preload("res://Square Scenes/road/visible_roads.tscn")
+var build_preview_scene = preload("res://Menus/Hovers/base hover.tscn")
 var map_x: int
 var map_y: int
 var map_elevation = 0
@@ -92,17 +93,20 @@ func _on_hover():
 	if (is_buildable()):
 		if(Input.is_mouse_button_pressed( MOUSE_BUTTON_LEFT )):
 			check_and_build_road()
-		# TODO Show price
+		# show road preview
 		preview_roads = visible_road_scene.instantiate()
 		preview_roads.init(map_x, map_y)
 		add_child(preview_roads)
 		preview_roads.set_custom_material(hover_material)
-		#flat_mesh.set_surface_override_material(0, hover_material)
+		# show price
+		show_build_preview()
 
 func _on_unhover():
 	if (preview_roads != null):
 		preview_roads.hide_roads()
 		preview_roads.clear_custom_material()
+		# hide build price
+		hide_build_preview()
 
 # todo click and drag to build
 func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
@@ -111,6 +115,15 @@ func _on_flat_input_event(_camera, event, _position, _normal, _shape_idx):
 			if (event.is_pressed()):
 				_on_click()
 
+var build_cost_preview
+func show_build_preview():
+	build_cost_preview = build_preview_scene.instantiate()
+	build_cost_preview.position = get_viewport().get_mouse_position()
+	add_child(build_cost_preview)
+
+func hide_build_preview():
+	remove_child(build_cost_preview)
+	build_cost_preview.queue_free()
 
 func _process(_delta):
 	pass
