@@ -21,6 +21,9 @@ func set_town_type(new_town_type):
 		GameData.TownType.GRAIN_FARM:
 			$Silo.show()
 			$Inn.hide()
+		GameData.TownType.MILL:
+			$Mill.show()
+			$Inn.hide()
 
 func add_product(new_product):
 	if not products.has(new_product):

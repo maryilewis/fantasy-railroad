@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://dfpi2efleni3m"]
+
+[ext_resource type="PackedScene" uid="uid://bqgc5vvtpnrin" path="res://Assets/Kenny/Mill/watermillWide.glb" id="1_tsmdu"]
+[ext_resource type="PackedScene" uid="uid://bobmw03f32xea" path="res://Assets/Kenny/Mill/wallWoodDetailCross.glb" id="2_khv7b"]
+[ext_resource type="PackedScene" uid="uid://cbk1e6wlp37fg" path="res://Assets/Kenny/Mill/wallWoodDetailDiagonal.glb" id="3_athvk"]
+[ext_resource type="PackedScene" uid="uid://smkpq82rg5qi" path="res://Assets/Kenny/Mill/wallWoodDoor.glb" id="4_ga2kb"]
+[ext_resource type="PackedScene" uid="uid://ci4ulgqamxo53" path="res://Assets/Kenny/Mill/roofHighLeft.glb" id="5_3mvxj"]
+[ext_resource type="PackedScene" uid="uid://cbi6a8ukn15p0" path="res://Assets/Kenny/Mill/roofHighRight.glb" id="6_mc4ts"]
+[ext_resource type="PackedScene" uid="uid://djd0cxwxr7x7y" path="res://Assets/Kenny/Mill/roofHigh.glb" id="7_x5657"]
+[ext_resource type="PackedScene" uid="uid://br1pne1u52yey" path="res://Assets/Kenny/Mill/roofHighGableDetail.glb" id="8_26vyu"]
+[ext_resource type="PackedScene" uid="uid://bjy0u0h7tojv7" path="res://Assets/Kenny/Mill/wallWoodWindowRound.glb" id="9_l342r"]
+[ext_resource type="PackedScene" uid="uid://bm4xbsvv7v7bm" path="res://Assets/Kenny/Mill/wallCorner.glb" id="10_mkrab"]
+[ext_resource type="PackedScene" uid="uid://cml60yatv1cob" path="res://Assets/Kenny/Mill/wall.glb" id="11_fk4vl"]
+[ext_resource type="PackedScene" uid="uid://cx1p3itldjbav" path="res://Assets/Kenny/Mill/wallBlockHalf.glb" id="12_g0lvu"]
+
+[node name="WaterMill" type="Node3D"]
+
+[node name="lower level" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79069, -1.09915, -0.285597)
+
+[node name="watermillWide2" parent="." instance=ExtResource("1_tsmdu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60477, -1.75746, -0.352524)
+
+[node name="top level" type="Node3D" parent="."]
+
+[node name="wallWoodDetailCross2" parent="top level" instance=ExtResource("2_khv7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38081, -1, -2.25)
+
+[node name="wallWoodDetailDiagonal2" parent="top level" instance=ExtResource("3_athvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38081, -1, -1.25)
+
+[node name="wallWoodDetailDiagonal3" parent="top level" instance=ExtResource("3_athvk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.480814, -1, 0.708653)
+
+[node name="wallWoodDoor2" parent="top level" instance=ExtResource("4_ga2kb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38081, -1, -0.25)
+
+[node name="wallWoodWindowRound3" parent="top level" instance=ExtResource("9_l342r")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.49414, -0.961306, 0.746818)
+
+[node name="wallWoodWindowRound2" parent="top level" instance=ExtResource("9_l342r")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.497562, -1, 0.715662)
+
+[node name="roof" type="Node3D" parent="."]
+
+[node name="roof right" type="Node3D" parent="roof"]
+
+[node name="roofHighLeft2" parent="roof/roof right" instance=ExtResource("5_3mvxj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.75)
+
+[node name="roofHighRight2" parent="roof/roof right" instance=ExtResource("6_mc4ts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
+
+[node name="roofHigh2" parent="roof/roof right" instance=ExtResource("7_x5657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.25)
+
+[node name="roofHigh3" parent="roof/roof right" instance=ExtResource("7_x5657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.25)
+
+[node name="roof left" type="Node3D" parent="roof"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.5)
+
+[node name="roofHighLeft2" parent="roof/roof left" instance=ExtResource("5_3mvxj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.75)
+
+[node name="roofHighRight2" parent="roof/roof left" instance=ExtResource("6_mc4ts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
+
+[node name="roofHigh2" parent="roof/roof left" instance=ExtResource("7_x5657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.25)
+
+[node name="roofHigh3" parent="roof/roof left" instance=ExtResource("7_x5657")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.25)
+
+[node name="Gables" type="Node3D" parent="roof"]
+
+[node name="roofHighGableDetail2" parent="roof/Gables" instance=ExtResource("8_26vyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475858, 0, -0.255032)
+
+[node name="wallCorner2" parent="." instance=ExtResource("10_mkrab")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.433142, -2, -2.23842)
+
+[node name="wall3" parent="." instance=ExtResource("11_fk4vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33846, -2, -1.27419)
+
+[node name="wall2" parent="." instance=ExtResource("11_fk4vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33846, -2, -0.308788)
+
+[node name="wallCorner3" parent="." instance=ExtResource("10_mkrab")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.455612, -2, 0.675887)
+
+[node name="wallCorner3" parent="wallCorner3" instance=ExtResource("10_mkrab")]
+transform = Transform3D(0.0569889, 0, -0.998374, 0, 1, 0, 0.998374, 0, 0.0569889, 1, 0, 0)
+
+[node name="wallBlockHalf2" parent="." instance=ExtResource("12_g0lvu")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.75443, -2.0274, -0.356351)

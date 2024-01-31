@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b72yw4xfmsjfc"]
+[gd_scene load_steps=7 format=3 uid="uid://b72yw4xfmsjfc"]
 
 [ext_resource type="PackedScene" uid="uid://cgsuufqroigwm" path="res://Square Scenes/base.tscn" id="1_10sw8"]
 [ext_resource type="Script" path="res://Square Scenes/town/town_script.gd" id="2_7dpw0"]
 [ext_resource type="PackedScene" uid="uid://xkic6epux3xf" path="res://Assets/Quaternius/Towns/Fantasy Inn.glb" id="4_lssyb"]
 [ext_resource type="PackedScene" uid="uid://btqe6ug3j46th" path="res://Assets/Quaternius/Towns/Silo House.glb" id="5_27r3y"]
 [ext_resource type="PackedScene" uid="uid://ba1m583rcgisx" path="res://Square Scenes/town/building.tscn" id="5_d3qr1"]
+[ext_resource type="PackedScene" uid="uid://dfpi2efleni3m" path="res://Square Scenes/town/water mill.tscn" id="6_y0ok8"]
 
 [node name="Town" instance=ExtResource("1_10sw8")]
 script = ExtResource("2_7dpw0")
@@ -19,3 +20,9 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.5, 0)
 [node name="Silo" parent="." index="3" instance=ExtResource("5_27r3y")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.5, 0)
 visible = false
+
+[node name="Mill" type="Node3D" parent="." index="4"]
+visible = false
+
+[node name="WaterMill" parent="Mill" index="0" instance=ExtResource("6_y0ok8")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.239227, 1.00227, 0.196136)
